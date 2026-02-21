@@ -48,6 +48,16 @@ const projects = [
     github: "#",
     live: "#",
   },
+  {
+    title: "Us",
+    description:
+      "A relationship app for couples to strengthen their connection through daily questions, mood tracking, streaks, and a shared virtual garden. Built with modern Swift and SwiftUI.",
+    tags: ["Swift", "SwiftUI", "SwiftData", "CloudKit"],
+    gradientStyle: "linear-gradient(135deg, #e11d48, #f43f5e)",
+    emoji: "💕",
+    github: "https://github.com/berkcanmeric/us-app-v2",
+    live: "#",
+  },
 ];
 
 export default function Projects() {
@@ -76,7 +86,7 @@ export default function Projects() {
           </p>
         </motion.div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "2rem" }}>
+        <div className="projects-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "2rem" }}>
           {projects.map((project, idx) => (
             <motion.div
               key={project.title}

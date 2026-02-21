@@ -11,7 +11,7 @@ export const BentoGrid = ({
 }) => {
   return (
     <div
-      className={cn(className)}
+      className={cn("bento-grid", className)}
       style={{
         display: "grid",
         gridTemplateColumns: "repeat(3, 1fr)",

@@ -30,10 +30,11 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
 
   return (
     <div className="font-sans" ref={containerRef} style={{ width: "100%" }}>
-      <div ref={ref} style={{ position: "relative", maxWidth: "80rem", marginLeft: "auto", marginRight: "auto", paddingBottom: "5rem", paddingLeft: "2rem" }}>
+      <div ref={ref} className="timeline-container" style={{ position: "relative", maxWidth: "80rem", marginLeft: "auto", marginRight: "auto", paddingBottom: "5rem", paddingLeft: "2rem" }}>
         {data.map((item, index) => (
           <div
             key={index}
+            className="timeline-row"
             style={{
               display: "flex",
               justifyContent: "flex-start",
@@ -43,6 +44,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           >
             {/* Left sticky column with dot + year */}
             <div
+              className="timeline-sticky"
               style={{
                 position: "sticky",
                 top: "10rem",
@@ -99,6 +101,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
 
         {/* Animated line */}
         <div
+          className="timeline-line"
           style={{
             position: "absolute",
             left: "50px",

@@ -41,6 +41,7 @@ export const AnimatedTooltip = ({
     <>
       {items.map((item) => (
         <div
+          className="tooltip-avatar"
           style={{ position: "relative", marginRight: "-12px" }}
           key={item.name}
           onMouseEnter={() => setHoveredIndex(item.id)}

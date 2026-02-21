@@ -156,6 +156,7 @@ const SkeletonThree = () => (
 {/* --- Mock Phone for Mobile Dev --- */}
 const SkeletonFour = () => (
   <div
+    className="phone-row"
     style={{
       width: "100%",
       height: "100%",
@@ -171,7 +172,7 @@ const SkeletonFour = () => (
     }}
   >
     {/* Phone mockup 1 */}
-    <div style={{
+    <div className="phone-mockup" style={{
       width: "90px",
       height: "170px",
       borderRadius: "16px",
@@ -200,7 +201,7 @@ const SkeletonFour = () => (
     </div>
 
     {/* Phone mockup 2 */}
-    <div style={{
+    <div className="phone-mockup" style={{
       width: "90px",
       height: "170px",
       borderRadius: "16px",
@@ -228,7 +229,7 @@ const SkeletonFour = () => (
     </div>
 
     {/* Phone mockup 3 */}
-    <div style={{
+    <div className="phone-mockup" style={{
       width: "90px",
       height: "170px",
       borderRadius: "16px",

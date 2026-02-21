@@ -74,3 +74,112 @@ body {
 .animate-spotlight {
   animation: spotlight 2s ease 0.75s 1 forwards;
 }
+
+/* ===== Responsive overrides ===== */
+
+/* Bento grid: 3 cols → 2 cols → 1 col */
+@media (max-width: 1023px) {
+  .bento-grid {
+    grid-template-columns: 1fr 1fr !important;
+    grid-auto-rows: 20rem !important;
+  }
+  .bento-grid > * {
+    grid-column: span 1 !important;
+  }
+}
+@media (max-width: 639px) {
+  .bento-grid {
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: 18rem !important;
+  }
+}
+
+/* Projects grid: 2 cols → 1 col */
+@media (max-width: 639px) {
+  .projects-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+}
+
+/* Navbar: compact on mobile */
+@media (max-width: 639px) {
+  .floating-nav {
+    gap: 0.75rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    font-size: 12px !important;
+  }
+}
+
+/* Timeline: stack on mobile */
+@media (max-width: 767px) {
+  .timeline-row {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    padding-top: 2rem !important;
+  }
+  .timeline-row:first-child {
+    padding-top: 1rem !important;
+  }
+  .timeline-sticky {
+    position: relative !important;
+    top: auto !important;
+    width: auto !important;
+    min-width: auto !important;
+  }
+  .timeline-sticky h3 {
+    font-size: 1.5rem !important;
+    margin-left: 0.75rem !important;
+  }
+  .timeline-container {
+    padding-left: 0.5rem !important;
+  }
+  /* Hide the animated line on mobile — dots are enough */
+  .timeline-line {
+    display: none !important;
+  }
+}
+
+/* Experience accordion: smooth collapse */
+.exp-collapse-wrapper {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.3s ease;
+}
+.exp-collapse-wrapper[data-collapsed="true"] {
+  grid-template-rows: 0fr;
+}
+
+/* Hero buttons: stack on mobile */
+@media (max-width: 479px) {
+  .hero-buttons {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+}
+
+/* Animated tooltip: smaller on mobile */
+@media (max-width: 639px) {
+  .tooltip-avatar {
+    width: 48px !important;
+    height: 48px !important;
+    margin-right: -6px !important;
+  }
+  .tooltip-avatar img {
+    width: 30px !important;
+    height: 30px !important;
+  }
+}
+
+/* Phone mockups in bento: smaller on mobile */
+@media (max-width: 639px) {
+  .phone-row {
+    gap: 8px !important;
+    padding: 8px !important;
+  }
+  .phone-mockup {
+    width: 70px !important;
+    height: 140px !important;
+  }
+}

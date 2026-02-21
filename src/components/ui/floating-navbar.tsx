@@ -7,7 +7,7 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "framer-motion";
-import Link from "next/link";
+
 
 export const FloatingNav = ({
   navItems,
@@ -39,6 +39,7 @@ export const FloatingNav = ({
   return (
     <AnimatePresence mode="wait">
       <motion.nav
+        className="floating-nav"
         initial={{ opacity: 1, y: -100 }}
         animate={{
           y: visible ? 0 : -100,
@@ -48,8 +49,12 @@ export const FloatingNav = ({
         style={{
           position: "fixed",
           top: "1.25rem",
-          left: "50%",
-          transform: "translateX(-50%)",
+          left: 0,
+          right: 0,
+          width: "fit-content",
+          maxWidth: "calc(100vw - 2rem)",
+          marginLeft: "auto",
+          marginRight: "auto",
           zIndex: 5000,
           display: "flex",
           alignItems: "center",
@@ -67,15 +72,21 @@ export const FloatingNav = ({
         }}
       >
         {navItems.map((navItem, idx) => (
-          <Link
+          <a
             key={`link-${idx}`}
             href={navItem.link}
+            onClick={(e) => {
+              e.preventDefault();
+              const id = navItem.link.replace("#", "");
+              document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+            }}
             style={{
               fontSize: "14px",
               color: "#a3a3a3",
               textDecoration: "none",
               transition: "color 0.2s ease",
               whiteSpace: "nowrap",
+              cursor: "pointer",
             }}
             onMouseEnter={(e) => {
               (e.currentTarget as HTMLElement).style.color = "#ffffff";
@@ -85,7 +96,7 @@ export const FloatingNav = ({
             }}
           >
             {navItem.name}
-          </Link>
+          </a>
         ))}
       </motion.nav>
     </AnimatePresence>
