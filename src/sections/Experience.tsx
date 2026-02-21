@@ -32,7 +32,7 @@ const experiences: ExpEntry[] = [
     title: "Software Developer In Test",
     company: "Turkish Airlines",
     companyColor: "#e11d48",
-    companyLogo: "/logos/turkish-airlines.svg",
+    companyLogo: "/logos/turkish-airlines.png",
     description:
       "Building and maintaining test automation frameworks and contributing to full-stack development for one of the world's largest airlines.",
     tags: [
