@@ -2,26 +2,20 @@
 
 import { SparklesCore } from "@/components/ui/sparkles";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter, Mail, MapPin } from "lucide-react";
+import { Github, Linkedin, Mail, MapPin } from "lucide-react";
 
 const socials = [
   {
     name: "GitHub",
     icon: <Github className="h-5 w-5" />,
-    href: "https://github.com",
+    href: "https://github.com/berkcanmeric",
     color: "hover:text-white",
   },
   {
     name: "LinkedIn",
     icon: <Linkedin className="h-5 w-5" />,
-    href: "https://linkedin.com",
+    href: "https://www.linkedin.com/in/berkcanmeric/",
     color: "hover:text-blue-400",
-  },
-  {
-    name: "X / Twitter",
-    icon: <Twitter className="h-5 w-5" />,
-    href: "https://x.com",
-    color: "hover:text-white",
   },
   {
     name: "Email",

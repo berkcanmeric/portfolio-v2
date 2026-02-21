@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -11,6 +13,8 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const siteUrl = "https://berkcanmeric.com";
 
 export const metadata: Metadata = {
   title: "Berkcan Meric | Software Engineer",
@@ -26,6 +30,25 @@ export const metadata: Metadata = {
     "java",
     "spring boot",
   ],
+  metadataBase: new URL(siteUrl),
+  openGraph: {
+    title: "Berkcan Meric | Software Engineer",
+    description:
+      "Software Engineer building web and mobile applications with modern technologies.",
+    url: siteUrl,
+    siteName: "Berkcan Meric",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Berkcan Meric | Software Engineer",
+    description:
+      "Software Engineer building web and mobile applications with modern technologies.",
+  },
+  alternates: {
+    canonical: siteUrl,
+  },
 };
 
 export default function RootLayout({
@@ -39,6 +62,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black`}
       >
         {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

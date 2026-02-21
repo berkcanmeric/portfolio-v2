@@ -55,7 +55,7 @@ export default function Hero() {
 
         <div style={{ maxWidth: "42rem", marginLeft: "auto", marginRight: "auto", marginTop: "1rem" }}>
           <TextGenerateEffect
-            words="I craft beautiful digital experiences with clean code and creative design. Turning ideas into reality, one pixel at a time."
+            words="Software engineer at Turkish Airlines building web and mobile apps with React, Next.js, Java, and Swift."
           />
         </div>
 
