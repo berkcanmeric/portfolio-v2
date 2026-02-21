@@ -26,7 +26,7 @@ const socials = [
   {
     name: "Email",
     icon: <Mail className="h-5 w-5" />,
-    href: "mailto:hello@example.com",
+    href: "mailto:berkcan.m.business@hotmail.com",
     color: "hover:text-violet-400",
   },
 ];
@@ -94,7 +94,7 @@ export default function Contact() {
           transition={{ duration: 0.6, delay: 0.2 }}
           style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2rem" }}
         >
-          <a href="mailto:hello@example.com">
+          <a href="mailto:berkcan.m.business@hotmail.com">
             <button
               style={{
                 background: "white",
