@@ -39,7 +39,7 @@ export default function Hero() {
           transition={{ duration: 0.8 }}
         >
           <p className="text-neutral-400 tracking-widest uppercase" style={{ fontSize: "0.875rem", marginBottom: "1rem" }}>
-            Full-Stack Developer & Designer
+            Software Engineer
           </p>
         </motion.div>
 
