@@ -2,10 +2,7 @@
 
 import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
 import { motion } from "framer-motion";
-import {
-  IconBrandGithub,
-  IconExternalLink,
-} from "@tabler/icons-react";
+import { Github, ExternalLink, Heart } from "lucide-react";
 
 const projects = [
   {
@@ -14,7 +11,7 @@ const projects = [
       "A relationship app for couples to strengthen their connection through daily questions, mood tracking, streaks, and a shared virtual garden. Built with modern Swift and SwiftUI.",
     tags: ["Swift", "SwiftUI", "SwiftData", "CloudKit"],
     gradientStyle: "linear-gradient(135deg, #e11d48, #f43f5e)",
-    emoji: "💕",
+    icon: <Heart style={{ width: "3.75rem", height: "3.75rem", color: "white" }} />,
     github: "https://github.com/berkcanmeric/us-app-v2",
     live: "#",
   },
@@ -81,7 +78,7 @@ export default function Projects() {
                         justifyContent: "center",
                       }}
                     >
-                      <span style={{ fontSize: "3.75rem" }}>{project.emoji}</span>
+                      {project.icon}
                     </div>
                   </CardItem>
                   <CardItem
@@ -153,7 +150,7 @@ export default function Projects() {
                         textDecoration: "none",
                       }}
                     >
-                      <IconBrandGithub style={{ height: "1rem", width: "1rem" }} />
+                      <Github style={{ height: "1rem", width: "1rem" }} />
                       Source
                     </CardItem>
                     <CardItem
@@ -173,7 +170,7 @@ export default function Projects() {
                         textDecoration: "none",
                       }}
                     >
-                      <IconExternalLink style={{ height: "1rem", width: "1rem" }} />
+                      <ExternalLink style={{ height: "1rem", width: "1rem" }} />
                       Live Demo
                     </CardItem>
                   </div>

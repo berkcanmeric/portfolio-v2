@@ -3,20 +3,7 @@
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import { motion } from "framer-motion";
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
-import {
-  IconBrandReact,
-  IconBrandTypescript,
-  IconBrandNextjs,
-  IconBrandTailwind,
-  IconBrandNodejs,
-  IconBrandSwift,
-  IconBrandFigma,
-  IconBrandDocker,
-  IconCode,
-  IconDeviceMobile,
-  IconPalette,
-  IconRocket,
-} from "@tabler/icons-react";
+import { Code, Smartphone, Palette, Rocket, Figma } from "lucide-react";
 
 const techPeople = [
   { id: 1, name: "React", designation: "UI Library", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
@@ -119,7 +106,7 @@ const SkeletonThree = () => (
   >
     {/* Figma-like toolbar */}
     <div style={{ display: "flex", alignItems: "center", gap: "8px", padding: "6px 12px", background: "#12121f", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-      <IconBrandFigma style={{ width: 12, height: 12, color: "#a855f6" }} />
+      <Figma style={{ width: 12, height: 12, color: "#a855f6" }} />
       <span style={{ fontSize: "10px", color: "#585b70" }}>Design System</span>
       <div style={{ marginLeft: "auto", display: "flex", gap: "6px" }}>
         <div style={{ width: 14, height: 14, borderRadius: "3px", background: "#a855f6" }} />
@@ -259,15 +246,15 @@ const items = [
     description:
       "Building responsive, performant web applications with React, Next.js, and TypeScript. Pixel-perfect UIs with smooth animations.",
     header: <SkeletonOne />,
-    icon: <IconCode className="h-4 w-4 text-violet-400" />,
+    icon: <Code className="h-4 w-4 text-violet-400" />,
     colSpan: 2,
   },
   {
     title: "Backend & Infrastructure",
     description:
-      "Scalable APIs and microservices with Node.js, Python, and cloud platforms. Docker, CI/CD, and modern DevOps practices.",
+      "Scalable APIs and services with Java Spring Boot, Next.js functions, and Supabase. Docker, CI/CD, and modern DevOps practices.",
     header: <SkeletonTwo />,
-    icon: <IconRocket className="h-4 w-4 text-blue-400" />,
+    icon: <Rocket className="h-4 w-4 text-blue-400" />,
     colSpan: 1,
   },
   {
@@ -275,7 +262,7 @@ const items = [
     description:
       "Designing intuitive user experiences with Figma. From wireframes to polished, accessible interfaces.",
     header: <SkeletonThree />,
-    icon: <IconPalette className="h-4 w-4 text-emerald-400" />,
+    icon: <Palette className="h-4 w-4 text-emerald-400" />,
     colSpan: 1,
   },
   {
@@ -283,7 +270,7 @@ const items = [
     description:
       "Native iOS apps with Swift & SwiftUI. Cross-platform solutions with React Native. App Store published.",
     header: <SkeletonFour />,
-    icon: <IconDeviceMobile className="h-4 w-4 text-orange-400" />,
+    icon: <Smartphone className="h-4 w-4 text-orange-400" />,
     colSpan: 2,
   },
 ];

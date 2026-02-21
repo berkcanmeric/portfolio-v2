@@ -2,36 +2,30 @@
 
 import { SparklesCore } from "@/components/ui/sparkles";
 import { motion } from "framer-motion";
-import {
-  IconBrandGithub,
-  IconBrandLinkedin,
-  IconBrandX,
-  IconMail,
-  IconMapPin,
-} from "@tabler/icons-react";
+import { Github, Linkedin, Twitter, Mail, MapPin } from "lucide-react";
 
 const socials = [
   {
     name: "GitHub",
-    icon: <IconBrandGithub className="h-5 w-5" />,
+    icon: <Github className="h-5 w-5" />,
     href: "https://github.com",
     color: "hover:text-white",
   },
   {
     name: "LinkedIn",
-    icon: <IconBrandLinkedin className="h-5 w-5" />,
+    icon: <Linkedin className="h-5 w-5" />,
     href: "https://linkedin.com",
     color: "hover:text-blue-400",
   },
   {
     name: "X / Twitter",
-    icon: <IconBrandX className="h-5 w-5" />,
+    icon: <Twitter className="h-5 w-5" />,
     href: "https://x.com",
     color: "hover:text-white",
   },
   {
     name: "Email",
-    icon: <IconMail className="h-5 w-5" />,
+    icon: <Mail className="h-5 w-5" />,
     href: "mailto:hello@example.com",
     color: "hover:text-violet-400",
   },
@@ -88,7 +82,7 @@ export default function Contact() {
             className="text-neutral-500 text-sm"
             style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", marginBottom: "2.5rem" }}
           >
-            <IconMapPin className="h-4 w-4" />
+            <MapPin className="h-4 w-4" />
             <span>Available for remote & on-site work</span>
           </div>
         </motion.div>
@@ -116,7 +110,7 @@ export default function Contact() {
                 cursor: "pointer",
               }}
             >
-              <IconMail className="h-4 w-4" />
+              <Mail className="h-4 w-4" />
               Say Hello
             </button>
           </a>
