@@ -13,17 +13,18 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Berkcan | Portfolio",
+  title: "Berkcan Meric | Software Engineer",
   description:
-    "Full-Stack Developer & Designer crafting beautiful digital experiences.",
+    "Software Engineer building web and mobile applications with modern technologies.",
   keywords: [
-    "developer",
-    "portfolio",
-    "full-stack",
+    "software engineer",
+    "berkcan meric",
     "react",
     "next.js",
     "swift",
     "ios",
+    "java",
+    "spring boot",
   ],
 };
 
