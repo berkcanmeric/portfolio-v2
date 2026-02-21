@@ -172,14 +172,3 @@ body {
   }
 }
 
-/* Phone mockups in bento: smaller on mobile */
-@media (max-width: 639px) {
-  .phone-row {
-    gap: 8px !important;
-    padding: 8px !important;
-  }
-  .phone-mockup {
-    width: 70px !important;
-    height: 140px !important;
-  }
-}
