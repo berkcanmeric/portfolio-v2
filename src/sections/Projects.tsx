@@ -31,13 +31,13 @@ export default function Projects() {
           transition={{ duration: 0.6 }}
           style={{ textAlign: "center", marginBottom: "4rem" }}
         >
-          <p className="text-violet-400 text-sm tracking-widest uppercase" style={{ textAlign: "center", marginBottom: "0.75rem" }}>
+          <p className="text-violet-400" style={{ textAlign: "center", marginBottom: "0.75rem", fontSize: "0.8125rem", letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 500 }}>
             My Work
           </p>
-          <h2 className="font-bold text-white" style={{ textAlign: "center", marginBottom: "1.5rem", fontSize: "clamp(2rem, 5vw, 3rem)" }}>
+          <h2 className="text-white" style={{ textAlign: "center", marginBottom: "1.25rem", fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 600, letterSpacing: "-0.025em" }}>
             Featured Projects
           </h2>
-          <p className="text-neutral-400 text-lg" style={{ textAlign: "center", maxWidth: "42rem", marginLeft: "auto", marginRight: "auto" }}>
+          <p style={{ textAlign: "center", maxWidth: "42rem", marginLeft: "auto", marginRight: "auto", color: "#a3a3a3", fontSize: "1.0625rem", lineHeight: 1.6, letterSpacing: "0.01em" }}>
             A selection of projects that showcase my skills and passion for building
             great software.
           </p>
@@ -84,10 +84,11 @@ export default function Projects() {
                   <CardItem
                     translateZ="60"
                     style={{
-                      fontSize: "1.25rem",
-                      fontWeight: 700,
+                      fontSize: "1.375rem",
+                      fontWeight: 600,
                       color: "#ffffff",
                       marginTop: "1rem",
+                      letterSpacing: "-0.02em",
                     }}
                   >
                     {project.title}
@@ -97,9 +98,10 @@ export default function Projects() {
                     translateZ="40"
                     style={{
                       color: "#a3a3a3",
-                      fontSize: "0.875rem",
+                      fontSize: "0.9375rem",
                       marginTop: "0.5rem",
-                      lineHeight: "1.625",
+                      lineHeight: 1.7,
+                      letterSpacing: "0.01em",
                     }}
                   >
                     {project.description}
@@ -110,7 +112,7 @@ export default function Projects() {
                       marginTop: "1rem",
                       display: "flex",
                       flexWrap: "wrap",
-                      gap: "0.5rem",
+                      gap: "6px",
                     }}
                   >
                     {project.tags.map((tag) => (
@@ -118,11 +120,13 @@ export default function Projects() {
                         key={tag}
                         style={{
                           fontSize: "0.75rem",
-                          padding: "0.25rem 0.75rem",
-                          borderRadius: "9999px",
+                          fontWeight: 500,
+                          padding: "4px 12px",
+                          borderRadius: "6px",
                           background: "rgba(255,255,255,0.05)",
-                          border: "1px solid rgba(255,255,255,0.1)",
+                          border: "1px solid rgba(255,255,255,0.08)",
                           color: "#d4d4d4",
+                          letterSpacing: "0.01em",
                         }}
                       >
                         {tag}

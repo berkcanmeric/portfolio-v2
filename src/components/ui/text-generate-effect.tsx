@@ -53,9 +53,9 @@ export const TextGenerateEffect = ({
   };
 
   return (
-    <div className={cn("font-bold", className)}>
+    <div className={cn(className)}>
       <div style={{ marginTop: "1rem" }}>
-        <div className="text-neutral-200" style={{ fontSize: "clamp(1rem, 2.5vw, 1.5rem)", lineHeight: 1.5, letterSpacing: "0.025em" }}>
+        <div className="text-neutral-300" style={{ fontSize: "clamp(1rem, 2.5vw, 1.25rem)", lineHeight: 1.6, letterSpacing: "0.01em", fontWeight: 400 }}>
           {renderWords()}
         </div>
       </div>

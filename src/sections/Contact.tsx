@@ -51,14 +51,14 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
         >
           <p
-            className="text-violet-400 text-sm tracking-widest uppercase"
-            style={{ textAlign: "center", marginBottom: "0.75rem" }}
+            className="text-violet-400"
+            style={{ textAlign: "center", marginBottom: "0.75rem", fontSize: "0.8125rem", letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 500 }}
           >
             Get In Touch
           </p>
           <h2
-            className="font-bold text-white"
-            style={{ textAlign: "center", marginBottom: "1.5rem", fontSize: "clamp(2rem, 5vw, 3rem)" }}
+            className="text-white"
+            style={{ textAlign: "center", marginBottom: "1.25rem", fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 600, letterSpacing: "-0.025em" }}
           >
             Let&apos;s Build Something{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-blue-500">
@@ -66,15 +66,13 @@ export default function Contact() {
             </span>
           </h2>
           <p
-            className="text-neutral-400 text-lg"
-            style={{ textAlign: "center", maxWidth: "36rem", marginLeft: "auto", marginRight: "auto", marginBottom: "1rem" }}
+            style={{ textAlign: "center", maxWidth: "36rem", marginLeft: "auto", marginRight: "auto", marginBottom: "1rem", color: "#a3a3a3", fontSize: "1.0625rem", lineHeight: 1.6, letterSpacing: "0.01em" }}
           >
             I&apos;m always open to discussing new projects, creative ideas, or
             opportunities to be part of something great.
           </p>
           <div
-            className="text-neutral-500 text-sm"
-            style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", marginBottom: "2.5rem" }}
+            style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", marginBottom: "2.5rem", color: "#525252", fontSize: "0.8125rem" }}
           >
             <MapPin className="h-4 w-4" />
             <span>Available for remote & on-site work</span>

@@ -84,13 +84,13 @@ export default function About() {
           transition={{ duration: 0.6 }}
           style={{ textAlign: "center", marginBottom: "4rem" }}
         >
-          <p className="text-violet-400 text-sm tracking-widest uppercase" style={{ textAlign: "center", marginBottom: "0.75rem" }}>
+          <p className="text-violet-400" style={{ textAlign: "center", marginBottom: "0.75rem", fontSize: "0.8125rem", letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 500 }}>
             What I Do
           </p>
-          <h2 className="font-bold text-white" style={{ textAlign: "center", marginBottom: "1.5rem", fontSize: "clamp(2rem, 5vw, 3rem)" }}>
+          <h2 className="text-white" style={{ textAlign: "center", marginBottom: "1.25rem", fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 600, letterSpacing: "-0.025em" }}>
             Skills & Expertise
           </h2>
-          <p className="text-neutral-400 text-lg" style={{ textAlign: "center", maxWidth: "42rem", marginLeft: "auto", marginRight: "auto" }}>
+          <p style={{ textAlign: "center", maxWidth: "42rem", marginLeft: "auto", marginRight: "auto", color: "#a3a3a3", fontSize: "1.0625rem", lineHeight: 1.6, letterSpacing: "0.01em" }}>
             I specialize in building end-to-end digital products, from concept to deployment.
             Here&apos;s my toolkit:
           </p>
@@ -124,7 +124,7 @@ export default function About() {
           transition={{ duration: 0.6, delay: 0.4 }}
           style={{ marginTop: "4rem", textAlign: "center" }}
         >
-          <p className="text-neutral-500 text-sm tracking-wide uppercase" style={{ textAlign: "center", marginBottom: "2rem" }}>
+          <p style={{ textAlign: "center", marginBottom: "2rem", color: "#525252", fontSize: "0.75rem", letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 500 }}>
             Technologies I love
           </p>
           <div

@@ -81,11 +81,13 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
               </div>
               <h3
                 style={{
-                  fontSize: "3rem",
-                  fontWeight: "bold",
-                  color: "#737373",
+                  fontSize: "2.5rem",
+                  fontWeight: 600,
+                  color: "#525252",
                   marginLeft: "1.5rem",
                   lineHeight: 1,
+                  letterSpacing: "-0.025em",
+                  fontVariantNumeric: "tabular-nums",
                 }}
               >
                 {item.title}

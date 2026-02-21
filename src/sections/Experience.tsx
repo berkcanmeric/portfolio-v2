@@ -1,18 +1,9 @@
 "use client";
 
 import { Timeline } from "@/components/ui/timeline";
-import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-
-interface TechItem {
-  id: number;
-  name: string;
-  designation: string;
-  image: string;
-  dark?: boolean;
-}
 
 interface ExpEntry {
   year: string;
@@ -21,10 +12,8 @@ interface ExpEntry {
   companyColor: string;
   companyLogo?: string;
   description: string;
-  tags: TechItem[];
+  tags: string[];
 }
-
-const DEV = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons";
 
 const experiences: ExpEntry[] = [
   {
@@ -35,15 +24,7 @@ const experiences: ExpEntry[] = [
     companyLogo: "/logos/turkish-airlines.png",
     description:
       "Building and maintaining test automation frameworks and contributing to full-stack development for one of the world's largest airlines.",
-    tags: [
-      { id: 1, name: "TypeScript", designation: "Type Safety", image: `${DEV}/typescript/typescript-original.svg` },
-      { id: 2, name: "Next.js", designation: "React Framework", image: `${DEV}/nextjs/nextjs-original.svg`, dark: true },
-      { id: 3, name: "Java", designation: "Backend Language", image: `${DEV}/java/java-original.svg` },
-      { id: 4, name: "Spring Boot", designation: "Java Framework", image: `${DEV}/spring/spring-original.svg` },
-      { id: 5, name: "Playwright", designation: "E2E Testing", image: `${DEV}/playwright/playwright-original.svg` },
-      { id: 6, name: "REST Assured", designation: "API Testing", image: `${DEV}/java/java-original.svg` },
-      { id: 7, name: "Swagger", designation: "API Docs", image: `${DEV}/swagger/swagger-original.svg` },
-    ],
+    tags: ["TypeScript", "Next.js", "Java", "Spring Boot", "Playwright", "REST Assured", "Swagger"],
   },
   {
     year: "2022",
@@ -52,12 +33,7 @@ const experiences: ExpEntry[] = [
     companyColor: "#60a5fa",
     description:
       "Developed full-stack applications and automated testing solutions, working across backend services and end-to-end test frameworks.",
-    tags: [
-      { id: 1, name: ".NET", designation: "Backend Framework", image: `${DEV}/dotnetcore/dotnetcore-original.svg` },
-      { id: 2, name: "PostgreSQL", designation: "Database", image: `${DEV}/postgresql/postgresql-original.svg` },
-      { id: 3, name: "Cypress", designation: "E2E Testing", image: `${DEV}/cypressio/cypressio-original.svg`, dark: true },
-      { id: 4, name: "JavaScript", designation: "Web Language", image: `${DEV}/javascript/javascript-original.svg` },
-    ],
+    tags: [".NET", "PostgreSQL", "Cypress", "JavaScript"],
   },
 ];
 
@@ -85,10 +61,13 @@ function ExperienceCard({
       >
         <div style={{ flex: 1 }}>
           <h4
-            className="font-bold text-white"
+            className="text-white"
             style={{
-              fontSize: "clamp(1.125rem, 2vw, 1.5rem)",
-              marginBottom: "0.5rem",
+              fontSize: "clamp(1.25rem, 2.5vw, 1.75rem)",
+              fontWeight: 600,
+              letterSpacing: "-0.025em",
+              lineHeight: 1.3,
+              marginBottom: "0.625rem",
             }}
           >
             {exp.title}
@@ -98,12 +77,12 @@ function ExperienceCard({
               <Image
                 src={exp.companyLogo}
                 alt={exp.company}
-                width={24}
-                height={24}
-                style={{ borderRadius: "6px" }}
+                width={20}
+                height={20}
+                style={{ borderRadius: "4px" }}
               />
             )}
-            <span style={{ color: exp.companyColor, fontSize: "0.875rem", fontWeight: 500 }}>
+            <span style={{ color: exp.companyColor, fontSize: "0.8125rem", fontWeight: 500, letterSpacing: "0.01em" }}>
               {exp.company}
             </span>
           </div>
@@ -134,16 +113,34 @@ function ExperienceCard({
           <p
             style={{
               color: "#a3a3a3",
-              fontSize: "0.875rem",
-              lineHeight: 1.625,
-              marginTop: "1rem",
-              marginBottom: "1rem",
+              fontSize: "0.9375rem",
+              lineHeight: 1.7,
+              marginTop: "1.25rem",
+              marginBottom: "1.25rem",
+              letterSpacing: "0.01em",
             }}
           >
             {exp.description}
           </p>
-          <div style={{ display: "flex", flexDirection: "row", alignItems: "center", paddingTop: "0.5rem" }}>
-            <AnimatedTooltip items={exp.tags} />
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", paddingTop: "0.25rem" }}>
+            {exp.tags.map((tag) => (
+              <span
+                key={tag}
+                style={{
+                  fontSize: "0.75rem",
+                  fontWeight: 500,
+                  color: "#d4d4d4",
+                  padding: "4px 12px",
+                  borderRadius: "6px",
+                  background: "rgba(255,255,255,0.05)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  letterSpacing: "0.01em",
+                  lineHeight: 1.5,
+                }}
+              >
+                {tag}
+              </span>
+            ))}
           </div>
         </div>
       </div>
@@ -203,28 +200,33 @@ export default function Experience() {
           style={{ textAlign: "center", marginBottom: "3rem" }}
         >
           <p
-            className="text-violet-400 text-sm tracking-widest uppercase"
-            style={{ textAlign: "center", marginBottom: "0.75rem" }}
+            className="text-violet-400"
+            style={{ textAlign: "center", marginBottom: "0.75rem", fontSize: "0.8125rem", letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 500 }}
           >
             My Journey
           </p>
           <h2
-            className="font-bold text-white"
+            className="text-white"
             style={{
               textAlign: "center",
-              marginBottom: "1.5rem",
+              marginBottom: "1.25rem",
               fontSize: "clamp(2rem, 5vw, 3rem)",
+              fontWeight: 600,
+              letterSpacing: "-0.025em",
             }}
           >
             Experience
           </h2>
           <p
-            className="text-neutral-400 text-lg"
             style={{
               textAlign: "center",
               maxWidth: "42rem",
               marginLeft: "auto",
               marginRight: "auto",
+              color: "#a3a3a3",
+              fontSize: "1.0625rem",
+              lineHeight: 1.6,
+              letterSpacing: "0.01em",
             }}
           >
             A timeline of my professional growth and the milestones that shaped

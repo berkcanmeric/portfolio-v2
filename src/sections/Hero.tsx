@@ -38,14 +38,14 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <p className="text-neutral-400 tracking-widest uppercase" style={{ fontSize: "0.875rem", marginBottom: "1rem" }}>
+          <p className="text-neutral-400" style={{ fontSize: "0.8125rem", marginBottom: "1rem", letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 500 }}>
             Software Engineer
           </p>
         </motion.div>
 
         <motion.h1
-          className="font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400"
-          style={{ fontSize: "clamp(3rem, 8vw, 6rem)", paddingBottom: "1rem" }}
+          className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400"
+          style={{ fontSize: "clamp(3rem, 8vw, 5.5rem)", paddingBottom: "1rem", fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.1 }}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}

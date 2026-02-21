@@ -81,16 +81,17 @@ export const BentoGridItem = ({
       >
         {icon}
         <div
-          className="font-sans font-bold text-neutral-200"
-          style={{ marginTop: "0.375rem", marginBottom: "0.25rem", fontSize: "0.875rem", lineHeight: "1.25rem" }}
+          className="font-sans text-neutral-200"
+          style={{ marginTop: "0.375rem", marginBottom: "0.25rem", fontSize: "0.875rem", lineHeight: "1.25rem", fontWeight: 600, letterSpacing: "-0.01em" }}
         >
           {title}
         </div>
         <div
-          className="font-sans font-normal text-neutral-400"
+          className="font-sans text-neutral-400"
           style={{
-            fontSize: "0.75rem",
-            lineHeight: "1.125rem",
+            fontSize: "0.8125rem",
+            lineHeight: "1.375rem",
+            letterSpacing: "0.01em",
             display: "-webkit-box",
             WebkitLineClamp: 3,
             WebkitBoxOrient: "vertical",
