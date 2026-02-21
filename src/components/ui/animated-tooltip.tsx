@@ -18,6 +18,7 @@ export const AnimatedTooltip = ({
     name: string;
     designation: string;
     image: string;
+    dark?: boolean;
   }[];
 }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -103,7 +104,7 @@ export const AnimatedTooltip = ({
               alignItems: "center",
               justifyContent: "center",
               border: "2px solid rgba(255,255,255,0.15)",
-              background: "#111",
+              background: "#222",
               cursor: "pointer",
               transition: "transform 0.3s ease, border-color 0.3s ease",
             }}
@@ -121,7 +122,7 @@ export const AnimatedTooltip = ({
               alt={item.name}
               width={40}
               height={40}
-              style={{ objectFit: "contain" }}
+              style={{ objectFit: "contain", filter: item.dark ? "brightness(0) invert(1)" : undefined }}
             />
           </div>
         </div>

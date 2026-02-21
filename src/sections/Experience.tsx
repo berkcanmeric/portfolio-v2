@@ -12,6 +12,7 @@ interface TechItem {
   name: string;
   designation: string;
   image: string;
+  dark?: boolean;
 }
 
 interface ExpEntry {
@@ -37,7 +38,7 @@ const experiences: ExpEntry[] = [
       "Building and maintaining test automation frameworks and contributing to full-stack development for one of the world's largest airlines.",
     tags: [
       { id: 1, name: "TypeScript", designation: "Type Safety", image: `${DEV}/typescript/typescript-original.svg` },
-      { id: 2, name: "Next.js", designation: "React Framework", image: `${DEV}/nextjs/nextjs-original.svg` },
+      { id: 2, name: "Next.js", designation: "React Framework", image: `${DEV}/nextjs/nextjs-original.svg`, dark: true },
       { id: 3, name: "Java", designation: "Backend Language", image: `${DEV}/java/java-original.svg` },
       { id: 4, name: "Spring Boot", designation: "Java Framework", image: `${DEV}/spring/spring-original.svg` },
       { id: 5, name: "Playwright", designation: "E2E Testing", image: `${DEV}/playwright/playwright-original.svg` },
@@ -55,7 +56,7 @@ const experiences: ExpEntry[] = [
     tags: [
       { id: 1, name: ".NET", designation: "Backend Framework", image: `${DEV}/dotnetcore/dotnetcore-original.svg` },
       { id: 2, name: "PostgreSQL", designation: "Database", image: `${DEV}/postgresql/postgresql-original.svg` },
-      { id: 3, name: "Cypress", designation: "E2E Testing", image: `${DEV}/cypressio/cypressio-original.svg` },
+      { id: 3, name: "Cypress", designation: "E2E Testing", image: `${DEV}/cypressio/cypressio-original.svg`, dark: true },
       { id: 4, name: "JavaScript", designation: "Web Language", image: `${DEV}/javascript/javascript-original.svg` },
     ],
   },
@@ -107,7 +108,7 @@ function ExperienceCard({
                 alt={exp.company}
                 width={20}
                 height={20}
-                style={{ borderRadius: "4px" }}
+                style={{ borderRadius: "50%", objectFit: "cover" }}
               />
               <span style={{ color: exp.companyColor, fontSize: "0.875rem", fontWeight: 500 }}>
                 {exp.company}
