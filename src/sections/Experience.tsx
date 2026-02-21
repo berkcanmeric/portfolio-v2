@@ -1,7 +1,6 @@
 "use client";
 
 import { Timeline } from "@/components/ui/timeline";
-import { MovingBorderButton } from "@/components/ui/moving-border";
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -94,31 +93,20 @@ function ExperienceCard({
           >
             {exp.title}
           </h4>
-          {exp.companyLogo ? (
-            <MovingBorderButton
-              as="div"
-              borderRadius="0.75rem"
-              containerClassName="h-auto w-fit"
-              className="px-3 py-1.5 gap-2"
-              borderClassName="bg-[radial-gradient(var(--rose-500)_40%,transparent_60%)]"
-              duration={3000}
-            >
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            {exp.companyLogo && (
               <Image
                 src={exp.companyLogo}
                 alt={exp.company}
-                width={20}
-                height={20}
-                style={{ borderRadius: "50%", objectFit: "cover" }}
+                width={24}
+                height={24}
+                style={{ borderRadius: "6px" }}
               />
-              <span style={{ color: exp.companyColor, fontSize: "0.875rem", fontWeight: 500 }}>
-                {exp.company}
-              </span>
-            </MovingBorderButton>
-          ) : (
-            <p style={{ color: exp.companyColor, fontSize: "0.875rem" }}>
+            )}
+            <span style={{ color: exp.companyColor, fontSize: "0.875rem", fontWeight: 500 }}>
               {exp.company}
-            </p>
-          )}
+            </span>
+          </div>
         </div>
         {showToggle && (
           <span
