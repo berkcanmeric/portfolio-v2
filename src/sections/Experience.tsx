@@ -1,20 +1,30 @@
 "use client";
 
 import { Timeline } from "@/components/ui/timeline";
+import { MovingBorderButton } from "@/components/ui/moving-border";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import Image from "next/image";
+
+interface TechTag {
+  name: string;
+  icon: string;
+}
 
 interface ExpEntry {
   year: string;
   title: string;
   company: string;
   companyColor: string;
+  companyLogo?: string;
   description: string;
-  tags: string[];
+  tags: TechTag[];
   tagColor: string;
   tagBg: string;
   tagBorder: string;
 }
+
+const DEV = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons";
 
 const experiences: ExpEntry[] = [
   {
@@ -22,9 +32,18 @@ const experiences: ExpEntry[] = [
     title: "Software Developer In Test",
     company: "Turkish Airlines",
     companyColor: "#e11d48",
+    companyLogo: "https://logo.clearbit.com/turkishairlines.com",
     description:
       "Building and maintaining test automation frameworks and contributing to full-stack development for one of the world's largest airlines.",
-    tags: ["TypeScript", "Next.js", "Java", "Spring Boot", "Playwright", "REST Assured", "Swagger"],
+    tags: [
+      { name: "TypeScript", icon: `${DEV}/typescript/typescript-original.svg` },
+      { name: "Next.js", icon: `${DEV}/nextjs/nextjs-original.svg` },
+      { name: "Java", icon: `${DEV}/java/java-original.svg` },
+      { name: "Spring Boot", icon: `${DEV}/spring/spring-original.svg` },
+      { name: "Playwright", icon: `${DEV}/playwright/playwright-original.svg` },
+      { name: "REST Assured", icon: `${DEV}/java/java-original.svg` },
+      { name: "Swagger", icon: `${DEV}/swagger/swagger-original.svg` },
+    ],
     tagColor: "#fda4af",
     tagBg: "rgba(225,29,72,0.1)",
     tagBorder: "rgba(225,29,72,0.2)",
@@ -36,7 +55,12 @@ const experiences: ExpEntry[] = [
     companyColor: "#60a5fa",
     description:
       "Developed full-stack applications and automated testing solutions, working across backend services and end-to-end test frameworks.",
-    tags: [".NET", "PostgreSQL", "Cypress", "JavaScript"],
+    tags: [
+      { name: ".NET", icon: `${DEV}/dotnetcore/dotnetcore-original.svg` },
+      { name: "PostgreSQL", icon: `${DEV}/postgresql/postgresql-original.svg` },
+      { name: "Cypress", icon: `${DEV}/cypressio/cypressio-original.svg` },
+      { name: "JavaScript", icon: `${DEV}/javascript/javascript-original.svg` },
+    ],
     tagColor: "#93c5fd",
     tagBg: "rgba(59,130,246,0.1)",
     tagBorder: "rgba(59,130,246,0.2)",
@@ -75,9 +99,31 @@ function ExperienceCard({
           >
             {exp.title}
           </h4>
-          <p style={{ color: exp.companyColor, fontSize: "0.875rem" }}>
-            {exp.company}
-          </p>
+          {exp.companyLogo ? (
+            <MovingBorderButton
+              as="div"
+              borderRadius="0.75rem"
+              containerClassName="h-auto w-fit"
+              className="px-3 py-1.5 gap-2"
+              borderClassName="bg-[radial-gradient(var(--rose-500)_40%,transparent_60%)]"
+              duration={3000}
+            >
+              <Image
+                src={exp.companyLogo}
+                alt={exp.company}
+                width={20}
+                height={20}
+                style={{ borderRadius: "4px" }}
+              />
+              <span style={{ color: exp.companyColor, fontSize: "0.875rem", fontWeight: 500 }}>
+                {exp.company}
+              </span>
+            </MovingBorderButton>
+          ) : (
+            <p style={{ color: exp.companyColor, fontSize: "0.875rem" }}>
+              {exp.company}
+            </p>
+          )}
         </div>
         {showToggle && (
           <span
@@ -116,7 +162,7 @@ function ExperienceCard({
           <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
             {exp.tags.map((tag) => (
               <span
-                key={tag}
+                key={tag.name}
                 style={{
                   color: exp.tagColor,
                   fontSize: "0.75rem",
@@ -124,9 +170,19 @@ function ExperienceCard({
                   borderRadius: "9999px",
                   background: exp.tagBg,
                   border: `1px solid ${exp.tagBorder}`,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.375rem",
                 }}
               >
-                {tag}
+                <Image
+                  src={tag.icon}
+                  alt={tag.name}
+                  width={14}
+                  height={14}
+                  style={{ objectFit: "contain" }}
+                />
+                {tag.name}
               </span>
             ))}
           </div>

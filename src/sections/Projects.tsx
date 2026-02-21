@@ -171,7 +171,7 @@ export default function Projects() {
                       }}
                     >
                       <ExternalLink style={{ height: "1rem", width: "1rem" }} />
-                      Live Demo
+                      Coming Soon
                     </CardItem>
                   </div>
                 </CardBody>
