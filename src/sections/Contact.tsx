@@ -139,20 +139,6 @@ export default function Contact() {
           </div>
         </motion.div>
 
-        {/* Footer */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          style={{ marginTop: "4rem", paddingTop: "2rem", borderTop: "1px solid rgba(255,255,255,0.05)", textAlign: "center" }}
-        >
-          <p className="text-neutral-600 text-sm">
-            Designed & built by{" "}
-            <span className="text-neutral-400">Berkcan</span> with Next.js &
-            Aceternity UI
-          </p>
-        </motion.div>
       </div>
     </section>
   );
