@@ -9,46 +9,6 @@ import {
 
 const projects = [
   {
-    title: "E-Commerce Platform",
-    description:
-      "A full-stack e-commerce platform with real-time inventory, Stripe payments, and an admin dashboard. Built with Next.js, Prisma, and PostgreSQL.",
-    tags: ["Next.js", "TypeScript", "Prisma", "Stripe"],
-    gradientStyle: "linear-gradient(135deg, #7c3aed, #4f46e5)",
-    emoji: "🛒",
-    github: "#",
-    live: "#",
-  },
-  {
-    title: "AI Chat Application",
-    description:
-      "Real-time AI-powered chat app with streaming responses, conversation history, and multiple model support. Uses WebSockets and SSE.",
-    tags: ["React", "Node.js", "OpenAI", "WebSocket"],
-    gradientStyle: "linear-gradient(135deg, #0891b2, #2563eb)",
-    emoji: "🤖",
-    github: "#",
-    live: "#",
-  },
-  {
-    title: "iOS Fitness Tracker",
-    description:
-      "Native iOS app for tracking workouts, nutrition, and health metrics. Features CloudKit sync, HealthKit integration, and beautiful SwiftUI charts.",
-    tags: ["Swift", "SwiftUI", "CloudKit", "HealthKit"],
-    gradientStyle: "linear-gradient(135deg, #ea580c, #db2777)",
-    emoji: "💪",
-    github: "#",
-    live: "#",
-  },
-  {
-    title: "Analytics Dashboard",
-    description:
-      "Interactive data visualization dashboard with real-time charts, custom filters, and PDF report generation. Handles millions of data points.",
-    tags: ["React", "D3.js", "Python", "FastAPI"],
-    gradientStyle: "linear-gradient(135deg, #059669, #0d9488)",
-    emoji: "📊",
-    github: "#",
-    live: "#",
-  },
-  {
     title: "Us",
     description:
       "A relationship app for couples to strengthen their connection through daily questions, mood tracking, streaks, and a shared virtual garden. Built with modern Swift and SwiftUI.",
