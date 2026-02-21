@@ -2,13 +2,16 @@
 
 import { Timeline } from "@/components/ui/timeline";
 import { MovingBorderButton } from "@/components/ui/moving-border";
+import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-interface TechTag {
+interface TechItem {
+  id: number;
   name: string;
-  icon: string;
+  designation: string;
+  image: string;
 }
 
 interface ExpEntry {
@@ -18,10 +21,7 @@ interface ExpEntry {
   companyColor: string;
   companyLogo?: string;
   description: string;
-  tags: TechTag[];
-  tagColor: string;
-  tagBg: string;
-  tagBorder: string;
+  tags: TechItem[];
 }
 
 const DEV = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons";
@@ -32,21 +32,18 @@ const experiences: ExpEntry[] = [
     title: "Software Developer In Test",
     company: "Turkish Airlines",
     companyColor: "#e11d48",
-    companyLogo: "https://logo.clearbit.com/turkishairlines.com",
+    companyLogo: "/logos/turkish-airlines.svg",
     description:
       "Building and maintaining test automation frameworks and contributing to full-stack development for one of the world's largest airlines.",
     tags: [
-      { name: "TypeScript", icon: `${DEV}/typescript/typescript-original.svg` },
-      { name: "Next.js", icon: `${DEV}/nextjs/nextjs-original.svg` },
-      { name: "Java", icon: `${DEV}/java/java-original.svg` },
-      { name: "Spring Boot", icon: `${DEV}/spring/spring-original.svg` },
-      { name: "Playwright", icon: `${DEV}/playwright/playwright-original.svg` },
-      { name: "REST Assured", icon: `${DEV}/java/java-original.svg` },
-      { name: "Swagger", icon: `${DEV}/swagger/swagger-original.svg` },
+      { id: 1, name: "TypeScript", designation: "Type Safety", image: `${DEV}/typescript/typescript-original.svg` },
+      { id: 2, name: "Next.js", designation: "React Framework", image: `${DEV}/nextjs/nextjs-original.svg` },
+      { id: 3, name: "Java", designation: "Backend Language", image: `${DEV}/java/java-original.svg` },
+      { id: 4, name: "Spring Boot", designation: "Java Framework", image: `${DEV}/spring/spring-original.svg` },
+      { id: 5, name: "Playwright", designation: "E2E Testing", image: `${DEV}/playwright/playwright-original.svg` },
+      { id: 6, name: "REST Assured", designation: "API Testing", image: `${DEV}/java/java-original.svg` },
+      { id: 7, name: "Swagger", designation: "API Docs", image: `${DEV}/swagger/swagger-original.svg` },
     ],
-    tagColor: "#fda4af",
-    tagBg: "rgba(225,29,72,0.1)",
-    tagBorder: "rgba(225,29,72,0.2)",
   },
   {
     year: "2022",
@@ -56,14 +53,11 @@ const experiences: ExpEntry[] = [
     description:
       "Developed full-stack applications and automated testing solutions, working across backend services and end-to-end test frameworks.",
     tags: [
-      { name: ".NET", icon: `${DEV}/dotnetcore/dotnetcore-original.svg` },
-      { name: "PostgreSQL", icon: `${DEV}/postgresql/postgresql-original.svg` },
-      { name: "Cypress", icon: `${DEV}/cypressio/cypressio-original.svg` },
-      { name: "JavaScript", icon: `${DEV}/javascript/javascript-original.svg` },
+      { id: 1, name: ".NET", designation: "Backend Framework", image: `${DEV}/dotnetcore/dotnetcore-original.svg` },
+      { id: 2, name: "PostgreSQL", designation: "Database", image: `${DEV}/postgresql/postgresql-original.svg` },
+      { id: 3, name: "Cypress", designation: "E2E Testing", image: `${DEV}/cypressio/cypressio-original.svg` },
+      { id: 4, name: "JavaScript", designation: "Web Language", image: `${DEV}/javascript/javascript-original.svg` },
     ],
-    tagColor: "#93c5fd",
-    tagBg: "rgba(59,130,246,0.1)",
-    tagBorder: "rgba(59,130,246,0.2)",
   },
 ];
 
@@ -159,32 +153,8 @@ function ExperienceCard({
           >
             {exp.description}
           </p>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-            {exp.tags.map((tag) => (
-              <span
-                key={tag.name}
-                style={{
-                  color: exp.tagColor,
-                  fontSize: "0.75rem",
-                  padding: "0.25rem 0.75rem",
-                  borderRadius: "9999px",
-                  background: exp.tagBg,
-                  border: `1px solid ${exp.tagBorder}`,
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.375rem",
-                }}
-              >
-                <Image
-                  src={tag.icon}
-                  alt={tag.name}
-                  width={14}
-                  height={14}
-                  style={{ objectFit: "contain" }}
-                />
-                {tag.name}
-              </span>
-            ))}
+          <div style={{ display: "flex", flexDirection: "row", alignItems: "center", paddingTop: "0.5rem" }}>
+            <AnimatedTooltip items={exp.tags} />
           </div>
         </div>
       </div>
