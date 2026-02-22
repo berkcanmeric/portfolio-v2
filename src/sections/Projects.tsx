@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, ExternalLink, Heart } from "lucide-react";
+import { Github, ExternalLink } from "lucide-react";
 import Image from "next/image";
 import { useRef, useEffect, useCallback, useState } from "react";
+import CountUp from "@/components/ui/count-up";
 
 const screenshots = [
   { src: "/screenshots/us-app-1.png", alt: "Us App - Daily Questions" },
@@ -34,7 +35,7 @@ function PhoneCarousel() {
     <div
       style={{
         width: "240px",
-        height: "480px",
+        height: "520px",
         borderRadius: "2.5rem",
         border: "3px solid rgba(255,255,255,0.1)",
         background: "#000",
@@ -44,20 +45,6 @@ function PhoneCarousel() {
           "0 0 60px -15px rgba(225, 29, 72, 0.3), inset 0 0 30px rgba(0,0,0,0.5)",
       }}
     >
-      {/* Dynamic Island notch */}
-      <div
-        style={{
-          position: "absolute",
-          top: "0.5rem",
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: "30%",
-          height: "1.25rem",
-          background: "#000",
-          borderRadius: "9999px",
-          zIndex: 3,
-        }}
-      />
 
       {/* Screenshot slides */}
       <div
@@ -120,6 +107,115 @@ function PhoneCarousel() {
           />
         ))}
       </div>
+    </div>
+  );
+}
+
+const LAUNCH_DATE = new Date("2026-04-22T00:00:00").getTime();
+
+function getTimeLeft() {
+  const now = Date.now();
+  const diff = Math.max(0, LAUNCH_DATE - now);
+  return {
+    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((diff / (1000 * 60)) % 60),
+    seconds: Math.floor((diff / 1000) % 60),
+  };
+}
+
+const numberStyle: React.CSSProperties = {
+  fontSize: "1.5rem",
+  fontWeight: 700,
+  lineHeight: 1.2,
+  fontVariantNumeric: "tabular-nums",
+  color: "#fff",
+};
+
+const labelStyle: React.CSSProperties = {
+  fontSize: "0.6875rem",
+  color: "#a78bfa",
+  textTransform: "uppercase",
+  letterSpacing: "0.05em",
+  fontWeight: 500,
+  marginTop: "2px",
+};
+
+const boxStyle: React.CSSProperties = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  background: "rgba(139, 92, 246, 0.06)",
+  border: "1px solid rgba(139, 92, 246, 0.2)",
+  borderRadius: "0.75rem",
+  padding: "0.625rem 0.875rem",
+  minWidth: "4rem",
+};
+
+function CountdownTimer() {
+  const [time, setTime] = useState(getTimeLeft);
+  const [introPlayed, setIntroPlayed] = useState(false);
+  const initialTime = useRef(getTimeLeft());
+
+  useEffect(() => {
+    setTime(getTimeLeft());
+    const id = setInterval(() => setTime(getTimeLeft()), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  // After 2s (enough for the spring to settle), switch to live ticking
+  useEffect(() => {
+    const id = setTimeout(() => setIntroPlayed(true), 2000);
+    return () => clearTimeout(id);
+  }, []);
+
+  const units: { key: keyof ReturnType<typeof getTimeLeft>; label: string }[] = [
+    { key: "days", label: "days" },
+    { key: "hours", label: "hrs" },
+    { key: "minutes", label: "min" },
+    { key: "seconds", label: "sec" },
+  ];
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "0.5rem",
+        marginBottom: "1.5rem",
+        flexWrap: "wrap",
+      }}
+    >
+      {units.map((unit, i) => (
+        <div key={unit.key} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <div style={boxStyle}>
+            {!introPlayed ? (
+              <CountUp
+                to={initialTime.current[unit.key]}
+                from={0}
+                duration={1.5}
+                style={numberStyle}
+              />
+            ) : (
+              <span style={numberStyle}>{time[unit.key]}</span>
+            )}
+            <span style={labelStyle}>{unit.label}</span>
+          </div>
+          {i < units.length - 1 && (
+            <span
+              style={{
+                color: "rgba(139, 92, 246, 0.4)",
+                fontSize: "1.25rem",
+                fontWeight: 700,
+                lineHeight: 1,
+              }}
+            >
+              :
+            </span>
+          )}
+        </div>
+      ))}
     </div>
   );
 }
@@ -280,7 +376,7 @@ export default function Projects() {
                   display: "flex",
                   flexWrap: "wrap",
                   gap: "8px",
-                  marginBottom: "2rem",
+                  marginBottom: "1.5rem",
                 }}
               >
                 {project.tags.map((tag) => (
@@ -301,6 +397,8 @@ export default function Projects() {
                   </span>
                 ))}
               </div>
+
+              <CountdownTimer />
 
               <div
                 style={{
@@ -331,7 +429,7 @@ export default function Projects() {
                   style={{ padding: "8px 20px" }}
                 >
                   <ExternalLink style={{ height: "0.875rem", width: "0.875rem" }} />
-                  Coming Soon
+                  Launching on App Store
                 </a>
               </div>
             </div>
