@@ -21,6 +21,15 @@ const project = {
   live: "#",
 };
 
+const shipkit = {
+  title: "ShipKit",
+  description:
+    "The Vibe Coder's Toolkit — a curated platform of copy-paste resources for every stage of development. AI prompts, MCP servers, agents, web & mobile SDKs, and workflow recipes to help developers ship faster.",
+  tags: ["Next.js", "React", "Tailwind CSS", "shadcn/ui", "Framer Motion"],
+  github: "https://github.com/berkcanmeric/shipkit",
+  live: "https://shipkit-zeta.vercel.app",
+};
+
 function PhoneCarousel() {
   const [current, setCurrent] = useState(0);
 
@@ -318,6 +327,7 @@ export default function Projects() {
           </p>
         </motion.div>
 
+        {/* Us App Card */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -447,6 +457,202 @@ export default function Projects() {
               }}
             >
               <PhoneCarousel />
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ShipKit Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          style={{ marginTop: "2rem" }}
+        >
+          <div
+            className="project-featured-reverse group"
+            style={{
+              display: "flex",
+              gap: "2.5rem",
+              background: "#0a0a0a",
+              border: "1px solid rgba(255,255,255,0.08)",
+              borderRadius: "1.5rem",
+              padding: "2.5rem",
+              position: "relative",
+              overflow: "hidden",
+              transition: "border-color 0.3s ease",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.borderColor =
+                "rgba(0, 240, 255, 0.2)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.borderColor =
+                "rgba(255,255,255,0.08)";
+            }}
+          >
+            {/* Cyan background glow */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(ellipse 60% 60% at 30% 50%, rgba(0, 240, 255, 0.04), transparent)",
+              }}
+            />
+
+            {/* Left: Perspective float screenshot (40%) */}
+            <div
+              className="project-mockup-reverse"
+              style={{
+                flex: "0 0 40%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                position: "relative",
+                zIndex: 1,
+              }}
+            >
+              <div style={{ position: "relative" }}>
+                {/* Ambient glow behind screenshot */}
+                <div
+                  className="absolute -inset-4 rounded-3xl opacity-0 group-hover:opacity-100"
+                  style={{
+                    background: "radial-gradient(ellipse at center, rgba(0, 240, 255, 0.15), transparent 70%)",
+                    filter: "blur(20px)",
+                    transition: "opacity 0.7s ease",
+                  }}
+                />
+                {/* Screenshot with perspective tilt */}
+                <div
+                  className="shipkit-screenshot"
+                  style={{
+                    position: "relative",
+                    overflow: "hidden",
+                    borderRadius: "0.75rem",
+                    boxShadow: "0 20px 80px -20px rgba(0, 0, 0, 0.5)",
+                    transform: "perspective(1200px) rotateY(-4deg) rotateX(2deg)",
+                    transition: "transform 0.5s ease-out, box-shadow 0.5s ease-out",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                  }}
+                >
+                  <Image
+                    src="/screenshots/shipkit-hero.png"
+                    alt="ShipKit — The Vibe Coder's Toolkit"
+                    width={1512}
+                    height={944}
+                    style={{ display: "block", width: "100%", height: "auto" }}
+                    sizes="(max-width: 768px) 100vw, 400px"
+                    priority
+                  />
+                  {/* Bottom fade so it doesn't end abruptly */}
+                  <div
+                    className="absolute inset-x-0 bottom-0"
+                    style={{
+                      height: "4rem",
+                      background: "linear-gradient(to top, #0a0a0a, transparent)",
+                      pointerEvents: "none",
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Info (60%) */}
+            <div
+              className="project-info-reverse"
+              style={{
+                flex: "0 0 60%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                position: "relative",
+                zIndex: 1,
+              }}
+            >
+              <h3
+                className="text-white"
+                style={{
+                  fontSize: "2rem",
+                  fontWeight: 600,
+                  letterSpacing: "-0.025em",
+                  marginBottom: "1rem",
+                }}
+              >
+                {shipkit.title}
+              </h3>
+              <p
+                style={{
+                  color: "#a3a3a3",
+                  fontSize: "1rem",
+                  lineHeight: 1.7,
+                  letterSpacing: "0.01em",
+                  marginBottom: "1.5rem",
+                }}
+              >
+                {shipkit.description}
+              </p>
+
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "8px",
+                  marginBottom: "1.5rem",
+                }}
+              >
+                {shipkit.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    style={{
+                      fontSize: "0.8125rem",
+                      fontWeight: 500,
+                      padding: "6px 16px",
+                      borderRadius: "9999px",
+                      background: "rgba(0, 240, 255, 0.1)",
+                      border: "1px solid rgba(0, 240, 255, 0.2)",
+                      color: "#67e8f9",
+                      letterSpacing: "0.01em",
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "1rem",
+                }}
+              >
+                <a
+                  href={shipkit.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-neutral-400 hover:text-white transition-colors duration-200"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                    fontSize: "0.875rem",
+                    textDecoration: "none",
+                  }}
+                >
+                  <Github style={{ height: "1.125rem", width: "1.125rem" }} />
+                  Source Code
+                </a>
+                <a
+                  href={shipkit.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm font-semibold rounded-full bg-white text-black no-underline hover:opacity-90 transition-opacity duration-200"
+                  style={{ padding: "8px 20px" }}
+                >
+                  <ExternalLink style={{ height: "0.875rem", width: "0.875rem" }} />
+                  Visit Site
+                </a>
+              </div>
             </div>
           </div>
         </motion.div>

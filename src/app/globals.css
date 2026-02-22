@@ -207,6 +207,12 @@ body::after {
   }
 }
 
+/* Projects: hover effect for perspective screenshot */
+.project-featured-reverse:hover .shipkit-screenshot {
+  transform: perspective(1200px) rotateY(0deg) rotateX(0deg) scale(1.02) !important;
+  box-shadow: 0 25px 60px -15px rgba(0, 240, 255, 0.2) !important;
+}
+
 /* Projects: responsive */
 @media (max-width: 767px) {
   .project-featured {
@@ -215,6 +221,17 @@ body::after {
   .project-info,
   .project-mockup {
     width: 100% !important;
+  }
+  .project-featured-reverse {
+    flex-direction: column !important;
+  }
+  .project-mockup-reverse,
+  .project-info-reverse {
+    width: 100% !important;
+    flex: none !important;
+  }
+  .shipkit-screenshot {
+    transform: none !important;
   }
 }
 
