@@ -1,134 +1,204 @@
 "use client";
 
-import { useScroll, useTransform, motion } from "framer-motion";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 
 interface TimelineEntry {
   title: string;
   content: React.ReactNode;
+  isLatest?: boolean;
 }
 
 export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
-  const ref = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const fillRef = useRef<HTMLDivElement>(null);
+  const dotRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const pulseRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [height, setHeight] = useState(0);
 
   useEffect(() => {
-    if (ref.current) {
-      const rect = ref.current.getBoundingClientRect();
+    if (innerRef.current) {
+      const rect = innerRef.current.getBoundingClientRect();
       setHeight(rect.height);
     }
-  }, [ref]);
+  }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 10%", "end 50%"],
-  });
+  const onScroll = useCallback(() => {
+    const container = containerRef.current;
+    const inner = innerRef.current;
+    const fill = fillRef.current;
+    if (!container || !inner || !fill) return;
 
-  const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
-  const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
+    const rect = container.getBoundingClientRect();
+    const viewH = window.innerHeight;
+
+    const start = viewH * 0.9;
+    const end = viewH * 0.5;
+
+    const scrolled = start - rect.top;
+    const total = rect.height - (viewH - start) + (viewH - end);
+    const progress = Math.min(1, Math.max(0, scrolled / total));
+
+    fill.style.transform = `scaleY(${progress})`;
+
+    // The fill line's pixel height from top of inner container
+    const fillHeight = progress * inner.getBoundingClientRect().height;
+
+    // Update each dot based on whether the line has reached it
+    dotRefs.current.forEach((dot, i) => {
+      if (!dot) return;
+      // Get dot's vertical center relative to inner container top
+      const dotRect = dot.getBoundingClientRect();
+      const innerRect = inner.getBoundingClientRect();
+      const dotCenter = dotRect.top - innerRect.top + dotRect.height / 2;
+
+      const reached = fillHeight >= dotCenter;
+
+      if (reached) {
+        dot.style.backgroundColor = "#7c3aed";
+        dot.style.border = "2px solid #a855f7";
+        dot.style.boxShadow = "0 0 12px rgba(139, 92, 246, 0.5)";
+      } else {
+        dot.style.backgroundColor = "#262626";
+        dot.style.border = "1px solid #404040";
+        dot.style.boxShadow = "none";
+      }
+
+      // Show/hide pulse ring
+      const pulse = pulseRefs.current[i];
+      if (pulse) {
+        pulse.style.display = reached ? "block" : "none";
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [onScroll]);
 
   return (
-    <div className="font-sans" ref={containerRef} style={{ width: "100%" }}>
-      <div ref={ref} className="timeline-container" style={{ position: "relative", maxWidth: "80rem", marginLeft: "auto", marginRight: "auto", paddingBottom: "5rem", paddingLeft: "2rem" }}>
+    <div
+      className="w-full font-sans"
+      style={{ paddingInline: "2.5rem" }}
+      ref={containerRef}
+    >
+      <div
+        ref={innerRef}
+        className="relative mx-auto"
+        style={{ maxWidth: "80rem", paddingBottom: "5rem" }}
+      >
         {data.map((item, index) => (
           <div
             key={index}
-            className="timeline-row"
+            className="flex justify-start"
             style={{
-              display: "flex",
-              justifyContent: "flex-start",
-              paddingTop: index === 0 ? "1rem" : "4rem",
-              gap: "3rem",
+              paddingTop: index === 0 ? "2.5rem" : "10rem",
+              gap: "2.5rem",
             }}
           >
-            {/* Left sticky column with dot + year */}
             <div
-              className="timeline-sticky"
-              style={{
-                position: "sticky",
-                top: "10rem",
-                alignSelf: "flex-start",
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                zIndex: 40,
-                width: "240px",
-                minWidth: "240px",
-              }}
+              className="sticky z-40 flex flex-row items-center self-start"
+              style={{ top: "10rem", width: "100%", maxWidth: "24rem" }}
             >
               <div
+                className="absolute flex items-center justify-center rounded-full"
                 style={{
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "50%",
+                  left: "0.75rem",
+                  height: "2.5rem",
+                  width: "2.5rem",
                   backgroundColor: "#000",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexShrink: 0,
                 }}
               >
+                {/* Pulse ring — hidden by default, shown when line reaches dot */}
                 <div
+                  ref={(el) => { pulseRefs.current[index] = el; }}
+                  className="absolute rounded-full"
                   style={{
-                    width: "16px",
-                    height: "16px",
-                    borderRadius: "50%",
+                    display: "none",
+                    width: "24px",
+                    height: "24px",
+                    border: "2px solid rgba(168, 85, 247, 0.4)",
+                    animation: "pulse-ring 2s ease-out infinite",
+                  }}
+                />
+                <div
+                  ref={(el) => { dotRefs.current[index] = el; }}
+                  className="rounded-full"
+                  style={{
+                    height: "1rem",
+                    width: "1rem",
+                    padding: "0.5rem",
                     backgroundColor: "#262626",
                     border: "1px solid #404040",
+                    boxShadow: "none",
+                    transition: "background-color 0.3s ease, border 0.3s ease, box-shadow 0.3s ease",
                   }}
                 />
               </div>
               <h3
+                className="hidden md:block font-bold"
                 style={{
-                  fontSize: "2.5rem",
-                  fontWeight: 600,
-                  color: "#525252",
-                  marginLeft: "1.5rem",
+                  paddingLeft: "5rem",
+                  fontSize: "3rem",
                   lineHeight: 1,
-                  letterSpacing: "-0.025em",
-                  fontVariantNumeric: "tabular-nums",
+                  color: "#737373",
                 }}
               >
                 {item.title}
               </h3>
             </div>
 
-            {/* Right content column */}
-            <div style={{ flex: 1, minWidth: 0 }}>
+            <div
+              className="relative w-full"
+              style={{ paddingRight: "1rem", paddingLeft: "1rem" }}
+            >
+              <h3
+                className="md:hidden block font-bold"
+                style={{
+                  fontSize: "1.5rem",
+                  marginBottom: "1rem",
+                  textAlign: "left",
+                  color: "#737373",
+                }}
+              >
+                {item.title}
+              </h3>
               {item.content}
             </div>
           </div>
         ))}
 
-        {/* Animated line */}
+        {/* Timeline track (gray) */}
         <div
-          className="timeline-line"
           style={{
             position: "absolute",
-            left: "50px",
+            left: "2rem",
             top: 0,
-            overflow: "hidden",
             width: "2px",
             height: height + "px",
-            background: "linear-gradient(to bottom, transparent 0%, #404040 10%, #404040 90%, transparent 100%)",
-            maskImage: "linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)",
-            WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)",
+            background:
+              "linear-gradient(to bottom, transparent 0%, #404040 10%, #404040 90%, transparent 100%)",
           }}
-        >
-          <motion.div
-            style={{
-              height: heightTransform,
-              opacity: opacityTransform,
-              position: "absolute",
-              insetInline: 0,
-              top: 0,
-              width: "100%",
-              background: "linear-gradient(to top, #a855f7, #3b82f6, transparent)",
-              borderRadius: "9999px",
-            }}
-          />
-        </div>
+        />
+
+        {/* Animated fill — vanilla JS drives scaleY, GPU-composited */}
+        <div
+          ref={fillRef}
+          style={{
+            position: "absolute",
+            left: "2rem",
+            top: 0,
+            width: "2px",
+            height: height + "px",
+            transformOrigin: "top",
+            transform: "scaleY(0)",
+            willChange: "transform",
+            background:
+              "linear-gradient(to bottom, transparent, #3080ff 10%, #ac4bff)",
+          }}
+        />
       </div>
     </div>
   );

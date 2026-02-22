@@ -34,6 +34,7 @@ export const BentoGridItem = ({
   header,
   icon,
   style,
+  glowColor,
 }: {
   className?: string;
   title?: string | React.ReactNode;
@@ -41,11 +42,12 @@ export const BentoGridItem = ({
   header?: React.ReactNode;
   icon?: React.ReactNode;
   style?: React.CSSProperties;
+  glowColor?: string;
 }) => {
   return (
     <div
       className={cn(
-        "rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-none bg-neutral-950 border border-white/[0.1]",
+        "bento-item rounded-xl group/bento transition duration-200 shadow-none bg-neutral-950 border border-white/[0.1]",
         className
       )}
       style={{
@@ -54,8 +56,9 @@ export const BentoGridItem = ({
         overflow: "hidden",
         padding: "0.625rem",
         height: "100%",
+        "--glow-color": glowColor || "rgba(139, 92, 246, 0.3)",
         ...style,
-      }}
+      } as React.CSSProperties}
     >
       {/* Header area */}
       <div
@@ -83,7 +86,14 @@ export const BentoGridItem = ({
         {icon}
         <div
           className="font-sans text-neutral-200"
-          style={{ marginTop: "0.3rem", marginBottom: "0.15rem", fontSize: "0.8125rem", lineHeight: "1.2rem", fontWeight: 600, letterSpacing: "-0.01em" }}
+          style={{
+            marginTop: "0.3rem",
+            marginBottom: "0.15rem",
+            fontSize: "0.8125rem",
+            lineHeight: "1.2rem",
+            fontWeight: 600,
+            letterSpacing: "-0.01em",
+          }}
         >
           {title}
         </div>

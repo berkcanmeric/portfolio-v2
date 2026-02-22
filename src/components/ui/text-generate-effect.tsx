@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils";
 export const TextGenerateEffect = ({
   words,
   className,
-  filter = true,
   duration = 0.5,
 }: {
   words: string;
@@ -21,16 +20,10 @@ export const TextGenerateEffect = ({
   useEffect(() => {
     animate(
       "span",
-      {
-        opacity: 1,
-        filter: filter ? "blur(0px)" : "none",
-      },
-      {
-        duration: duration,
-        delay: stagger(0.08),
-      }
+      { opacity: 1 },
+      { duration: duration, delay: stagger(0.08) }
     );
-  }, [scope, animate, filter, duration]);
+  }, [scope, animate, duration]);
 
   const renderWords = () => {
     return (
@@ -39,10 +32,7 @@ export const TextGenerateEffect = ({
           return (
             <motion.span
               key={word + idx}
-              className="opacity-0"
-              style={{
-                filter: filter ? "blur(10px)" : "none",
-              }}
+              style={{ opacity: 0 }}
             >
               {word}{" "}
             </motion.span>

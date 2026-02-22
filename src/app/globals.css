@@ -21,14 +21,9 @@
   --color-neutral-950: #0a0a0a;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 html {
-  scroll-behavior: smooth;
+  scrollbar-color: #7c3aed #0a0a0a;
+  scrollbar-width: thin;
 }
 
 body {
@@ -38,11 +33,26 @@ body {
   overflow-x: hidden;
 }
 
+/* Film grain — disabled for scroll performance. Uncomment if needed.
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/png;base64,...");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+} */
+
 ::selection {
   background: rgba(139, 92, 246, 0.3);
   color: #fff;
 }
 
+/* Enhanced scrollbar — violet gradient */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -52,13 +62,15 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: linear-gradient(to bottom, #7c3aed, #a855f7);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: linear-gradient(to bottom, #6d28d9, #8b5cf6);
 }
+
+/* ===== Keyframes ===== */
 
 @keyframes spotlight {
   0% {
@@ -70,9 +82,101 @@ body {
     transform: translate(-50%, -40%) scale(1);
   }
 }
-
 .animate-spotlight {
   animation: spotlight 2s ease 0.75s 1 forwards;
+}
+
+@keyframes blink-cursor {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.marquee-container:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes aurora {
+  0%,
+  100% {
+    background-position: 0% 50%, 100% 50%, 50% 50%;
+  }
+  25% {
+    background-position: 100% 50%, 0% 0%, 50% 100%;
+  }
+  50% {
+    background-position: 50% 100%, 50% 50%, 0% 50%;
+  }
+  75% {
+    background-position: 0% 0%, 100% 100%, 100% 0%;
+  }
+}
+
+/* ===== Bento card shine + glow ===== */
+
+.bento-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.04),
+    transparent
+  );
+  transform: skewX(-15deg);
+  transition: left 0.6s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.bento-item:hover::before {
+  left: 125%;
+}
+
+.bento-item:hover {
+  box-shadow: 0 0 40px -10px var(--glow-color, rgba(139, 92, 246, 0.3));
 }
 
 /* ===== Responsive overrides ===== */
@@ -96,11 +200,21 @@ body {
   }
 }
 
-/* Projects grid: 2 cols → 1 col */
+/* Domain grid: 2 cols → 1 col */
 @media (max-width: 639px) {
-  .projects-grid {
+  .domain-grid {
     grid-template-columns: 1fr !important;
-    gap: 1rem !important;
+  }
+}
+
+/* Projects: responsive */
+@media (max-width: 767px) {
+  .project-featured {
+    flex-direction: column !important;
+  }
+  .project-info,
+  .project-mockup {
+    width: 100% !important;
   }
 }
 
@@ -153,12 +267,47 @@ body {
   grid-template-rows: 0fr;
 }
 
+/* Hero button hover states */
+.hero-btn-primary:hover {
+  background: rgba(255, 255, 255, 1) !important;
+  box-shadow: 0 0 30px -4px rgba(255, 255, 255, 0.25) !important;
+  transform: translateY(-1px);
+}
+
+.hero-btn-secondary:hover {
+  background: rgba(139, 92, 246, 0.15) !important;
+  border-color: rgba(139, 92, 246, 0.4) !important;
+  color: #ddd6fe !important;
+  box-shadow: 0 0 24px -8px rgba(139, 92, 246, 0.3);
+  transform: translateY(-1px);
+}
+
 /* Hero buttons: stack on mobile */
 @media (max-width: 479px) {
   .hero-buttons {
     flex-direction: column !important;
     gap: 12px !important;
   }
+}
+
+/* Contact CTA — spinning border glow */
+@keyframes spin-border {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.contact-cta-wrapper:hover .contact-cta {
+  background: rgba(124, 58, 237, 0.12) !important;
+}
+
+.contact-cta-wrapper:hover {
+  box-shadow: 0 0 40px -8px rgba(139, 92, 246, 0.5);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
 }
 
 /* Animated tooltip: smaller on mobile */
@@ -173,4 +322,3 @@ body {
     height: 30px !important;
   }
 }
-

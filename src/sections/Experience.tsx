@@ -49,7 +49,26 @@ function ExperienceCard({
   showToggle: boolean;
 }) {
   return (
-    <div>
+    <div
+      className="group/exp"
+      style={{
+        borderRadius: "0.75rem",
+        padding: "1.25rem",
+        transition: "background 0.3s ease, border-color 0.3s ease",
+        borderLeft: "2px solid transparent",
+        marginLeft: "-1.25rem",
+      }}
+      onMouseEnter={(e) => {
+        (e.currentTarget as HTMLElement).style.background =
+          "rgba(139, 92, 246, 0.04)";
+        (e.currentTarget as HTMLElement).style.borderLeftColor =
+          "rgba(139, 92, 246, 0.4)";
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget as HTMLElement).style.background = "transparent";
+        (e.currentTarget as HTMLElement).style.borderLeftColor = "transparent";
+      }}
+    >
       <div
         onClick={showToggle ? onToggle : undefined}
         style={{
@@ -82,7 +101,14 @@ function ExperienceCard({
                 style={{ borderRadius: "4px" }}
               />
             )}
-            <span style={{ color: exp.companyColor, fontSize: "0.8125rem", fontWeight: 500, letterSpacing: "0.01em" }}>
+            <span
+              style={{
+                color: exp.companyColor,
+                fontSize: "0.8125rem",
+                fontWeight: 500,
+                letterSpacing: "0.01em",
+              }}
+            >
               {exp.company}
             </span>
           </div>
@@ -100,7 +126,7 @@ function ExperienceCard({
               display: "inline-block",
             }}
           >
-            ▼
+            &#x25BC;
           </span>
         )}
       </div>
@@ -122,7 +148,14 @@ function ExperienceCard({
           >
             {exp.description}
           </p>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", paddingTop: "0.25rem" }}>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "6px",
+              paddingTop: "0.25rem",
+            }}
+          >
             {exp.tags.map((tag) => (
               <span
                 key={tag}
@@ -174,6 +207,7 @@ export default function Experience() {
         showToggle={isMobile}
       />
     ),
+    isLatest: idx === 0,
   }));
 
   return (
@@ -185,8 +219,19 @@ export default function Experience() {
         background: "#000",
       }}
     >
+      {/* Faint horizontal lines background */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(to bottom, transparent 95%, rgba(255,255,255,0.02) 95%)",
+          backgroundSize: "100% 3rem",
+        }}
+      />
+
       <div
         style={{
+          position: "relative",
           maxWidth: "80rem",
           marginLeft: "auto",
           marginRight: "auto",
@@ -201,7 +246,14 @@ export default function Experience() {
         >
           <p
             className="text-violet-400"
-            style={{ textAlign: "center", marginBottom: "0.75rem", fontSize: "0.8125rem", letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 500 }}
+            style={{
+              textAlign: "center",
+              marginBottom: "0.75rem",
+              fontSize: "0.8125rem",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              fontWeight: 500,
+            }}
           >
             My Journey
           </p>
