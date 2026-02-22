@@ -7,7 +7,7 @@ import { Code, Smartphone, Palette, Rocket } from "lucide-react";
 
 const techPeople = [
   { id: 1, name: "React", designation: "UI Library", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-  { id: 2, name: "Next.js", designation: "React Framework", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg", dark: true },
+  { id: 2, name: "Next.js", designation: "React Framework", image: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-plain.svg", dark: true },
   { id: 3, name: "TypeScript", designation: "Type Safety", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
   { id: 4, name: "Swift", designation: "iOS Native", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg" },
   { id: 5, name: "Node.js", designation: "Runtime", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
@@ -47,62 +47,84 @@ const CodeWindow = ({ gradient, title, children }: {
 
 const FrontendCode = () => (
   <CodeWindow gradient="linear-gradient(135deg, #ff6b9d, #c76adb, #7d8cff)" title="page.tsx">
-    <span style={{color:k}}>import</span>{" {  "}<span style={{color:t}}>Metadata</span>{" } "}<span style={{color:k}}>from</span> <span style={{color:s}}>&quot;next&quot;</span>{"\n"}
-    <span style={{color:k}}>import</span> <span style={{color:f}}>Hero</span> <span style={{color:k}}>from</span> <span style={{color:s}}>&quot;@/components/Hero&quot;</span>{"\n"}
+    <span style={{color:k}}>import</span> {"{ "}<span style={{color:t}}>Suspense</span> {"} "}<span style={{color:k}}>from</span> <span style={{color:s}}>&quot;react&quot;</span>{"\n"}
+    <span style={{color:k}}>import</span> {"{ "}<span style={{color:f}}>getProjects</span> {"} "}<span style={{color:k}}>from</span> <span style={{color:s}}>&quot;@/lib/data&quot;</span>{"\n"}
     {"\n"}
-    <span style={{color:k}}>export const</span> <span style={{color:f}}>metadata</span>: <span style={{color:t}}>Metadata</span> = {"{"}{"\n"}
-    {"  "}<span style={{color:f}}>title</span>: <span style={{color:s}}>&quot;Portfolio&quot;</span>,{"\n"}
+    <span style={{color:k}}>export async function</span> <span style={{color:f}}>generateMetadata</span>({"{"}{"\n"}
+    {"  "}<span style={{color:f}}>params</span>,{"\n"}
+    {"}"}: <span style={{color:t}}>Props</span>) {"{"}{"\n"}
+    {"  "}<span style={{color:k}}>const</span> <span style={{color:f}}>project</span> = <span style={{color:k}}>await</span> <span style={{color:f}}>getProjects</span>(<span style={{color:f}}>params</span>.<span style={{color:f}}>slug</span>){"\n"}
+    {"  "}<span style={{color:k}}>return</span> {"{"} <span style={{color:f}}>title</span>: <span style={{color:f}}>project</span>.<span style={{color:f}}>name</span> {"}"}{"\n"}
     {"}"}{"\n"}
     {"\n"}
-    <span style={{color:k}}>export default function</span> <span style={{color:f}}>Page</span>() {"{"}{"\n"}
-    {"  "}<span style={{color:k}}>return</span> {"<"}<span style={{color:t}}>Hero</span> /{">"}{"\n"}
-    {"}"}
+    <span style={{color:k}}>export default async function</span> <span style={{color:f}}>Page</span>({"{ "}<span style={{color:f}}>params</span> {"}"}: <span style={{color:t}}>Props</span>) {"{"}{"\n"}
+    {"  "}<span style={{color:k}}>const</span> <span style={{color:f}}>data</span> = <span style={{color:k}}>await</span> <span style={{color:f}}>getProjects</span>(<span style={{color:f}}>params</span>.<span style={{color:f}}>slug</span>){"\n"}
+    {"  "}<span style={{color:k}}>return</span> ({"\n"}
+    {"    "}<span style={{color:p}}>{"<"}</span><span style={{color:t}}>Suspense</span> <span style={{color:f}}>fallback</span>={"{"}<span style={{color:p}}>{"<"}</span><span style={{color:t}}>Skeleton</span> /{">"}{"}"}{">"}{"\n"}
+    {"      "}<span style={{color:p}}>{"<"}</span><span style={{color:t}}>ProjectGrid</span> <span style={{color:f}}>items</span>={"{"}<span style={{color:f}}>data</span>{"}"} /{">"}{"\n"}
+    {"    "}<span style={{color:p}}>{"</"}</span><span style={{color:t}}>Suspense</span><span style={{color:p}}>{">"}</span>{"\n"}
+    {"  )"}
   </CodeWindow>
 );
 
 const BackendCode = () => (
   <CodeWindow gradient="linear-gradient(135deg, #0f2027, #203a43, #2c5364)" title="ApiController.java">
     <span style={{color:d}}>@RestController</span>{"\n"}
-    <span style={{color:d}}>@RequestMapping</span>(<span style={{color:s}}>&quot;/api&quot;</span>){"\n"}
-    <span style={{color:k}}>public class</span> <span style={{color:t}}>ApiController</span> {"{"}{"\n"}
+    <span style={{color:d}}>@RequestMapping</span>(<span style={{color:s}}>&quot;/api/v1&quot;</span>){"\n"}
+    <span style={{color:k}}>public class</span> <span style={{color:t}}>ProjectController</span> {"{"}{"\n"}
+    {"  "}<span style={{color:k}}>private final</span> <span style={{color:t}}>ProjectService</span> <span style={{color:f}}>service</span>;{"\n"}
     {"\n"}
-    {"  "}<span style={{color:d}}>@GetMapping</span>(<span style={{color:s}}>&quot;/health&quot;</span>){"\n"}
-    {"  "}<span style={{color:k}}>public</span> <span style={{color:t}}>ResponseEntity</span>{"<"}<span style={{color:t}}>String</span>{">"}{"\n"}
-    {"      "}<span style={{color:f}}>health</span>() {"{"}{"\n"}
-    {"    "}<span style={{color:k}}>return</span> <span style={{color:t}}>ResponseEntity</span>.<span style={{color:f}}>ok</span>(<span style={{color:s}}>&quot;UP&quot;</span>);{"\n"}
-    {"  }"}{"\n"}
-    {"}"}
+    {"  "}<span style={{color:d}}>@GetMapping</span>(<span style={{color:s}}>&quot;/projects&quot;</span>){"\n"}
+    {"  "}<span style={{color:k}}>public</span> <span style={{color:t}}>ResponseEntity</span>{"<"}<span style={{color:t}}>Page</span>{"<"}<span style={{color:t}}>ProjectDTO</span>{">>"}{"\n"}
+    {"      "}<span style={{color:f}}>list</span>(<span style={{color:d}}>@RequestParam</span> <span style={{color:t}}>Optional</span>{"<"}<span style={{color:t}}>String</span>{">"} <span style={{color:f}}>q</span>,{"\n"}
+    {"           "}<span style={{color:t}}>Pageable</span> <span style={{color:f}}>page</span>) {"{"}{"\n"}
+    {"    "}<span style={{color:k}}>var</span> <span style={{color:f}}>result</span> = <span style={{color:f}}>q</span>.<span style={{color:f}}>map</span>(<span style={{color:f}}>service</span>::<span style={{color:f}}>search</span>){"\n"}
+    {"      "}.<span style={{color:f}}>orElseGet</span>(() -{">"} <span style={{color:f}}>service</span>.<span style={{color:f}}>findAll</span>(<span style={{color:f}}>page</span>));{"\n"}
+    {"    "}<span style={{color:k}}>return</span> <span style={{color:t}}>ResponseEntity</span>.<span style={{color:f}}>ok</span>(<span style={{color:f}}>result</span>);{"\n"}
+    {"  }"}
   </CodeWindow>
 );
 
 const UiUxCode = () => (
   <CodeWindow gradient="linear-gradient(135deg, #38ef7d, #11998e)" title="design-tokens.css">
-    <span style={{color:p}}>:root</span> {"{"}{"\n"}
-    {"  "}<span style={{color:f}}>--primary</span>: <span style={{color:d}}>oklch(0.7 0.15 280)</span>;{"\n"}
-    {"  "}<span style={{color:f}}>--surface</span>: <span style={{color:d}}>oklch(0.2 0.02 260)</span>;{"\n"}
-    {"  "}<span style={{color:f}}>--text</span>: <span style={{color:d}}>oklch(0.95 0 0)</span>;{"\n"}
-    {"  "}<span style={{color:f}}>--radius</span>: <span style={{color:d}}>0.75rem</span>;{"\n"}
+    <span style={{color:d}}>@layer</span> <span style={{color:f}}>base</span> {"{"}{"\n"}
+    {"  "}<span style={{color:p}}>:root</span> {"{"}{"\n"}
+    {"    "}<span style={{color:f}}>--hue</span>: <span style={{color:d}}>280</span>;{"\n"}
+    {"    "}<span style={{color:f}}>--primary</span>: <span style={{color:d}}>oklch(0.7 0.18 var(--hue))</span>;{"\n"}
+    {"    "}<span style={{color:f}}>--surface</span>: <span style={{color:d}}>oklch(0.14 0.02 var(--hue))</span>;{"\n"}
+    {"    "}<span style={{color:f}}>--radius</span>: <span style={{color:d}}>0.75rem</span>;{"\n"}
+    {"    "}<span style={{color:f}}>--ease</span>: <span style={{color:d}}>cubic-bezier(.22, 1, .36, 1)</span>;{"\n"}
+    {"  }"}{"\n"}
     {"}"}{"\n"}
     {"\n"}
-    <span style={{color:c}}>{"/* Semantic tokens */"}</span>{"\n"}
-    <span style={{color:t}}>.card</span> {"{"}{"\n"}
-    {"  "}<span style={{color:f}}>background</span>: <span style={{color:k}}>var</span>(<span style={{color:f}}>--surface</span>);{"\n"}
-    {"}"}
+    <span style={{color:d}}>@layer</span> <span style={{color:f}}>components</span> {"{"}{"\n"}
+    {"  "}<span style={{color:t}}>.card</span> {"{"}{"\n"}
+    {"    "}<span style={{color:f}}>background</span>: <span style={{color:k}}>var</span>(<span style={{color:f}}>--surface</span>);{"\n"}
+    {"    "}<span style={{color:f}}>border-radius</span>: <span style={{color:k}}>var</span>(<span style={{color:f}}>--radius</span>);{"\n"}
+    {"    "}<span style={{color:f}}>transition</span>: <span style={{color:d}}>transform 0.4s</span> <span style={{color:k}}>var</span>(<span style={{color:f}}>--ease</span>);{"\n"}
+    {"  }"}
   </CodeWindow>
 );
 
 const MobileCode = () => (
   <CodeWindow gradient="linear-gradient(135deg, #ff512f, #f09819)" title="ContentView.swift">
+    <span style={{color:d}}>@Observable</span> <span style={{color:k}}>final class</span> <span style={{color:t}}>ViewModel</span> {"{"}{"\n"}
+    {"  "}<span style={{color:k}}>var</span> <span style={{color:f}}>items</span>: [<span style={{color:t}}>Project</span>] = []{"\n"}
+    {"  "}<span style={{color:k}}>var</span> <span style={{color:f}}>isLoading</span> = <span style={{color:d}}>false</span>{"\n"}
+    {"\n"}
+    {"  "}<span style={{color:k}}>func</span> <span style={{color:f}}>fetch</span>() <span style={{color:k}}>async throws</span> {"{"}{"\n"}
+    {"    "}<span style={{color:f}}>isLoading</span> = <span style={{color:d}}>true</span>{"\n"}
+    {"    "}<span style={{color:k}}>defer</span> {"{"} <span style={{color:f}}>isLoading</span> = <span style={{color:d}}>false</span> {"}"}{"\n"}
+    {"    "}<span style={{color:f}}>items</span> = <span style={{color:k}}>try await</span> <span style={{color:t}}>API</span>.<span style={{color:f}}>shared</span>.<span style={{color:f}}>projects</span>(){"\n"}
+    {"  }"}{"\n"}
+    {"}"}{"\n"}
+    {"\n"}
     <span style={{color:k}}>struct</span> <span style={{color:t}}>ContentView</span>: <span style={{color:t}}>View</span> {"{"}{"\n"}
+    {"  "}<span style={{color:d}}>@State</span> <span style={{color:k}}>private var</span> <span style={{color:f}}>vm</span> = <span style={{color:t}}>ViewModel</span>(){"\n"}
     {"  "}<span style={{color:k}}>var</span> <span style={{color:f}}>body</span>: <span style={{color:k}}>some</span> <span style={{color:t}}>View</span> {"{"}{"\n"}
     {"    "}<span style={{color:t}}>NavigationStack</span> {"{"}{"\n"}
-    {"      "}<span style={{color:t}}>List</span>(items) {"{ "}item <span style={{color:k}}>in</span>{"\n"}
-    {"        "}<span style={{color:t}}>ItemRow</span>(item: item){"\n"}
-    {"      }"}{"\n"}
-    {"      "}.<span style={{color:f}}>navigationTitle</span>(<span style={{color:s}}>&quot;Home&quot;</span>){"\n"}
-    {"    }"}{"\n"}
-    {"  }"}{"\n"}
-    {"}"}
+    {"      "}<span style={{color:t}}>List</span>(<span style={{color:f}}>vm</span>.<span style={{color:f}}>items</span>) {"{ "}<span style={{color:f}}>item</span> <span style={{color:k}}>in</span>{"\n"}
+    {"        "}<span style={{color:t}}>ProjectRow</span>(<span style={{color:f}}>item</span>)
   </CodeWindow>
 );
 
@@ -192,7 +214,7 @@ export default function About() {
           transition={{ duration: 0.6, delay: 0.4 }}
           style={{ marginTop: "4rem", textAlign: "center" }}
         >
-          <p style={{ textAlign: "center", marginBottom: "2rem", color: "#525252", fontSize: "0.75rem", letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 500 }}>
+          <p style={{ textAlign: "center", marginBottom: "2rem", color: "#737373", fontSize: "0.75rem", letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 500 }}>
             Technologies I love
           </p>
           <div

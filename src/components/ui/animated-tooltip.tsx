@@ -103,25 +103,27 @@ export const AnimatedTooltip = ({
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              border: "2px solid rgba(255,255,255,0.15)",
-              background: "#222",
+              border: "1px solid rgba(255,255,255,0.08)",
+              background: "rgba(255,255,255,0.04)",
               cursor: "pointer",
-              transition: "transform 0.3s ease, border-color 0.3s ease",
+              transition: "transform 0.3s ease, border-color 0.3s ease, background 0.3s ease",
             }}
             onMouseOver={(e) => {
               (e.currentTarget as HTMLElement).style.transform = "scale(1.1)";
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(168,85,246,0.6)";
+              (e.currentTarget as HTMLElement).style.borderColor = "rgba(168,85,246,0.5)";
+              (e.currentTarget as HTMLElement).style.background = "rgba(168,85,246,0.08)";
             }}
             onMouseOut={(e) => {
               (e.currentTarget as HTMLElement).style.transform = "scale(1)";
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.15)";
+              (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.08)";
+              (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.04)";
             }}
           >
             <Image
               src={item.image}
               alt={item.name}
-              width={40}
-              height={40}
+              width={36}
+              height={36}
               style={{ objectFit: "contain", filter: item.dark ? "brightness(0) invert(1)" : undefined }}
             />
           </div>
