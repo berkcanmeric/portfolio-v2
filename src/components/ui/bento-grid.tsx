@@ -15,7 +15,7 @@ export const BentoGrid = ({
       style={{
         display: "grid",
         gridTemplateColumns: "repeat(3, 1fr)",
-        gap: "1rem",
+        gap: "0.75rem",
         gridAutoRows: "22rem",
         maxWidth: "80rem",
         marginLeft: "auto",
@@ -52,48 +52,49 @@ export const BentoGridItem = ({
         display: "flex",
         flexDirection: "column",
         overflow: "hidden",
-        padding: "1rem",
+        padding: "0.625rem",
         height: "100%",
         ...style,
       }}
     >
-      {/* Header area - constrained to not exceed ~55% of the card */}
+      {/* Header area */}
       <div
         style={{
           flex: "1 1 0%",
           minHeight: 0,
           overflow: "hidden",
-          borderRadius: "0.75rem",
+          borderRadius: "0.625rem",
         }}
       >
         {header}
       </div>
 
-      {/* Content area - fixed at bottom, does not shrink or overflow */}
+      {/* Content area */}
       <div
-        className="group-hover/bento:translate-x-2 transition duration-200"
+        className="group-hover/bento:translate-x-1 transition duration-200"
         style={{
           flex: "0 0 auto",
           maxHeight: "40%",
-          paddingTop: "0.75rem",
+          paddingTop: "0.625rem",
+          paddingLeft: "0.25rem",
           overflow: "hidden",
         }}
       >
         {icon}
         <div
           className="font-sans text-neutral-200"
-          style={{ marginTop: "0.375rem", marginBottom: "0.25rem", fontSize: "0.875rem", lineHeight: "1.25rem", fontWeight: 600, letterSpacing: "-0.01em" }}
+          style={{ marginTop: "0.3rem", marginBottom: "0.15rem", fontSize: "0.8125rem", lineHeight: "1.2rem", fontWeight: 600, letterSpacing: "-0.01em" }}
         >
           {title}
         </div>
         <div
-          className="font-sans text-neutral-400"
+          className="font-sans text-neutral-500"
           style={{
-            fontSize: "0.8125rem",
-            lineHeight: "1.375rem",
-            letterSpacing: "0.01em",
+            fontSize: "0.75rem",
+            lineHeight: "1.2rem",
+            letterSpacing: "0.005em",
             display: "-webkit-box",
-            WebkitLineClamp: 3,
+            WebkitLineClamp: 2,
             WebkitBoxOrient: "vertical",
             overflow: "hidden",
           }}

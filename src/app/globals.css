@@ -82,6 +82,7 @@ body {
   .bento-grid {
     grid-template-columns: 1fr 1fr !important;
     grid-auto-rows: 20rem !important;
+    gap: 0.5rem !important;
   }
   .bento-grid > * {
     grid-column: span 1 !important;
@@ -91,6 +92,7 @@ body {
   .bento-grid {
     grid-template-columns: 1fr !important;
     grid-auto-rows: 18rem !important;
+    gap: 0.5rem !important;
   }
 }
 

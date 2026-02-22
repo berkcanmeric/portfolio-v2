@@ -28,17 +28,17 @@ const CodeWindow = ({ gradient, title, children }: {
   title: string;
   children: React.ReactNode;
 }) => (
-  <div style={{ width: "100%", height: "100%", borderRadius: "0.75rem", overflow: "hidden", background: gradient, padding: "10px" }}>
-    <div style={{ width: "100%", height: "100%", borderRadius: "8px", background: "rgba(13,17,23,0.92)", backdropFilter: "blur(8px)", display: "flex", flexDirection: "column", overflow: "hidden" }}>
+  <div style={{ width: "100%", height: "100%", borderRadius: "0.625rem", overflow: "hidden", background: gradient, padding: "5px" }}>
+    <div style={{ width: "100%", height: "100%", borderRadius: "6px", background: "rgba(13,17,23,0.94)", backdropFilter: "blur(12px)", display: "flex", flexDirection: "column", overflow: "hidden" }}>
       {/* Title bar */}
-      <div style={{ display: "flex", alignItems: "center", padding: "8px 12px", gap: "6px", borderBottom: "1px solid rgba(255,255,255,0.06)", flexShrink: 0 }}>
-        <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#ff5f56" }} />
-        <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#ffbd2e" }} />
-        <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#27c93f" }} />
-        <span style={{ marginLeft: "auto", marginRight: "auto", fontSize: "10px", color: "#6b7280", fontFamily: "monospace" }}>{title}</span>
+      <div style={{ display: "flex", alignItems: "center", padding: "6px 10px", gap: "5px", borderBottom: "1px solid rgba(255,255,255,0.05)", flexShrink: 0 }}>
+        <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#ff5f56" }} />
+        <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#ffbd2e" }} />
+        <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#27c93f" }} />
+        <span style={{ marginLeft: "auto", marginRight: "auto", fontSize: "9px", color: "#555", fontFamily: "monospace", letterSpacing: "0.02em" }}>{title}</span>
       </div>
       {/* Code */}
-      <pre style={{ flex: 1, margin: 0, padding: "10px 14px", fontFamily: "'Menlo','Fira Code','Consolas',monospace", fontSize: "11px", lineHeight: 1.65, overflow: "hidden", color: p, whiteSpace: "pre", tabSize: 2 }}>
+      <pre style={{ flex: 1, margin: 0, padding: "8px 12px", fontFamily: "'Menlo','Fira Code','Consolas',monospace", fontSize: "11px", lineHeight: 1.6, overflow: "hidden", color: p, whiteSpace: "pre", tabSize: 2 }}>
         {children}
       </pre>
     </div>
