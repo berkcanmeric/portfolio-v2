@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import { motion } from "framer-motion";
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
@@ -15,27 +14,96 @@ const techPeople = [
   { id: 6, name: "Tailwind", designation: "CSS Framework", image: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
 ];
 
-const CodeImage = ({ src, alt, bg }: { src: string; alt: string; bg: string }) => (
-  <div
-    style={{
-      width: "100%",
-      height: "100%",
-      borderRadius: "0.75rem",
-      overflow: "hidden",
-      position: "relative",
-      background: bg,
-    }}
-  >
-    <Image
-      src={src}
-      alt={alt}
-      fill
-      style={{ objectFit: "contain", transition: "transform 0.3s ease" }}
-      sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 66vw"
-      onMouseEnter={(e) => { (e.target as HTMLElement).style.transform = "scale(1.03)"; }}
-      onMouseLeave={(e) => { (e.target as HTMLElement).style.transform = "scale(1)"; }}
-    />
+/* Syntax colors */
+const k = "#c792ea";  // keyword (purple)
+const t = "#ffcb6b";  // type (yellow)
+const s = "#c3e88d";  // string (green)
+const f = "#82aaff";  // function (blue)
+const p = "#babed8";  // punctuation (white)
+const d = "#f78c6c";  // decorator/number (orange)
+const c = "#546e7a";  // comment (grey)
+
+const CodeWindow = ({ gradient, title, children }: {
+  gradient: string;
+  title: string;
+  children: React.ReactNode;
+}) => (
+  <div style={{ width: "100%", height: "100%", borderRadius: "0.75rem", overflow: "hidden", background: gradient, padding: "10px" }}>
+    <div style={{ width: "100%", height: "100%", borderRadius: "8px", background: "rgba(13,17,23,0.92)", backdropFilter: "blur(8px)", display: "flex", flexDirection: "column", overflow: "hidden" }}>
+      {/* Title bar */}
+      <div style={{ display: "flex", alignItems: "center", padding: "8px 12px", gap: "6px", borderBottom: "1px solid rgba(255,255,255,0.06)", flexShrink: 0 }}>
+        <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#ff5f56" }} />
+        <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#ffbd2e" }} />
+        <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#27c93f" }} />
+        <span style={{ marginLeft: "auto", marginRight: "auto", fontSize: "10px", color: "#6b7280", fontFamily: "monospace" }}>{title}</span>
+      </div>
+      {/* Code */}
+      <pre style={{ flex: 1, margin: 0, padding: "10px 14px", fontFamily: "'Menlo','Fira Code','Consolas',monospace", fontSize: "11px", lineHeight: 1.65, overflow: "hidden", color: p, whiteSpace: "pre", tabSize: 2 }}>
+        {children}
+      </pre>
+    </div>
   </div>
+);
+
+const FrontendCode = () => (
+  <CodeWindow gradient="linear-gradient(135deg, #ff6b9d, #c76adb, #7d8cff)" title="page.tsx">
+    <span style={{color:k}}>import</span>{" {  "}<span style={{color:t}}>Metadata</span>{" } "}<span style={{color:k}}>from</span> <span style={{color:s}}>&quot;next&quot;</span>{"\n"}
+    <span style={{color:k}}>import</span> <span style={{color:f}}>Hero</span> <span style={{color:k}}>from</span> <span style={{color:s}}>&quot;@/components/Hero&quot;</span>{"\n"}
+    {"\n"}
+    <span style={{color:k}}>export const</span> <span style={{color:f}}>metadata</span>: <span style={{color:t}}>Metadata</span> = {"{"}{"\n"}
+    {"  "}<span style={{color:f}}>title</span>: <span style={{color:s}}>&quot;Portfolio&quot;</span>,{"\n"}
+    {"}"}{"\n"}
+    {"\n"}
+    <span style={{color:k}}>export default function</span> <span style={{color:f}}>Page</span>() {"{"}{"\n"}
+    {"  "}<span style={{color:k}}>return</span> {"<"}<span style={{color:t}}>Hero</span> /{">"}{"\n"}
+    {"}"}
+  </CodeWindow>
+);
+
+const BackendCode = () => (
+  <CodeWindow gradient="linear-gradient(135deg, #0f2027, #203a43, #2c5364)" title="ApiController.java">
+    <span style={{color:d}}>@RestController</span>{"\n"}
+    <span style={{color:d}}>@RequestMapping</span>(<span style={{color:s}}>&quot;/api&quot;</span>){"\n"}
+    <span style={{color:k}}>public class</span> <span style={{color:t}}>ApiController</span> {"{"}{"\n"}
+    {"\n"}
+    {"  "}<span style={{color:d}}>@GetMapping</span>(<span style={{color:s}}>&quot;/health&quot;</span>){"\n"}
+    {"  "}<span style={{color:k}}>public</span> <span style={{color:t}}>ResponseEntity</span>{"<"}<span style={{color:t}}>String</span>{">"}{"\n"}
+    {"      "}<span style={{color:f}}>health</span>() {"{"}{"\n"}
+    {"    "}<span style={{color:k}}>return</span> <span style={{color:t}}>ResponseEntity</span>.<span style={{color:f}}>ok</span>(<span style={{color:s}}>&quot;UP&quot;</span>);{"\n"}
+    {"  }"}{"\n"}
+    {"}"}
+  </CodeWindow>
+);
+
+const UiUxCode = () => (
+  <CodeWindow gradient="linear-gradient(135deg, #38ef7d, #11998e)" title="design-tokens.css">
+    <span style={{color:p}}>:root</span> {"{"}{"\n"}
+    {"  "}<span style={{color:f}}>--primary</span>: <span style={{color:d}}>oklch(0.7 0.15 280)</span>;{"\n"}
+    {"  "}<span style={{color:f}}>--surface</span>: <span style={{color:d}}>oklch(0.2 0.02 260)</span>;{"\n"}
+    {"  "}<span style={{color:f}}>--text</span>: <span style={{color:d}}>oklch(0.95 0 0)</span>;{"\n"}
+    {"  "}<span style={{color:f}}>--radius</span>: <span style={{color:d}}>0.75rem</span>;{"\n"}
+    {"}"}{"\n"}
+    {"\n"}
+    <span style={{color:c}}>{"/* Semantic tokens */"}</span>{"\n"}
+    <span style={{color:t}}>.card</span> {"{"}{"\n"}
+    {"  "}<span style={{color:f}}>background</span>: <span style={{color:k}}>var</span>(<span style={{color:f}}>--surface</span>);{"\n"}
+    {"}"}
+  </CodeWindow>
+);
+
+const MobileCode = () => (
+  <CodeWindow gradient="linear-gradient(135deg, #ff512f, #f09819)" title="ContentView.swift">
+    <span style={{color:k}}>struct</span> <span style={{color:t}}>ContentView</span>: <span style={{color:t}}>View</span> {"{"}{"\n"}
+    {"  "}<span style={{color:k}}>var</span> <span style={{color:f}}>body</span>: <span style={{color:k}}>some</span> <span style={{color:t}}>View</span> {"{"}{"\n"}
+    {"    "}<span style={{color:t}}>NavigationStack</span> {"{"}{"\n"}
+    {"      "}<span style={{color:t}}>List</span>(items) {"{ "}item <span style={{color:k}}>in</span>{"\n"}
+    {"        "}<span style={{color:t}}>ItemRow</span>(item: item){"\n"}
+    {"      }"}{"\n"}
+    {"      "}.<span style={{color:f}}>navigationTitle</span>(<span style={{color:s}}>&quot;Home&quot;</span>){"\n"}
+    {"    }"}{"\n"}
+    {"  }"}{"\n"}
+    {"}"}
+  </CodeWindow>
 );
 
 const items = [
@@ -43,7 +111,7 @@ const items = [
     title: "Frontend Development",
     description:
       "Building responsive, performant web applications with React, Next.js, and TypeScript. Pixel-perfect UIs with smooth animations.",
-    header: <CodeImage src="/ray-frontend.png" alt="Next.js page.tsx code snippet" bg="linear-gradient(135deg, #ff6b9d, #c76adb, #7d8cff)" />,
+    header: <FrontendCode />,
     icon: <Code className="h-4 w-4 text-violet-400" />,
     colSpan: 2,
   },
@@ -51,7 +119,7 @@ const items = [
     title: "Backend & Infrastructure",
     description:
       "Scalable APIs and services with Java Spring Boot, Next.js functions, and Supabase. Docker, CI/CD, and modern DevOps practices.",
-    header: <CodeImage src="/ray-backend.png" alt="Spring Boot ApiController.java code snippet" bg="linear-gradient(135deg, #0f2027, #203a43, #2c5364)" />,
+    header: <BackendCode />,
     icon: <Rocket className="h-4 w-4 text-blue-400" />,
     colSpan: 1,
   },
@@ -59,7 +127,7 @@ const items = [
     title: "UI/UX Design",
     description:
       "Designing intuitive user experiences with Figma. From wireframes to polished, accessible interfaces.",
-    header: <CodeImage src="/ray-uiux.png" alt="CSS design-tokens.css code snippet" bg="linear-gradient(135deg, #38ef7d, #11998e)" />,
+    header: <UiUxCode />,
     icon: <Palette className="h-4 w-4 text-emerald-400" />,
     colSpan: 1,
   },
@@ -67,7 +135,7 @@ const items = [
     title: "Mobile Development",
     description:
       "Native iOS apps with Swift & SwiftUI. Cross-platform solutions with React Native. App Store published.",
-    header: <CodeImage src="/ray-mobile.png" alt="SwiftUI ContentView.swift code snippet" bg="linear-gradient(135deg, #ff5130, #f09819)" />,
+    header: <MobileCode />,
     icon: <Smartphone className="h-4 w-4 text-orange-400" />,
     colSpan: 2,
   },
